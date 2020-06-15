@@ -1,32 +1,80 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+  <div>
+    <Slide left width="800" class="menu" >
+       <a id="home" href="#"> 
+        <ul>
+          <li v-for="(project, projectNum) in projects" :key="projectNum">
+            {{project.name}}
+          </li>
+        </ul>
+      </a>
+    </Slide>
+
+    <div class="centerContent">
+      <router-view />
     </div>
-    <router-view/>
+
   </div>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+<script>
+import sanity from '@/sanity'
+
+const query = `*[_type == 'projects']{
+  name,
+  year,
+  headline
+}`
+
+import { Slide } from 'vue-burger-menu'
+  export default {
+    data() {
+      return {
+        projects: query
+      }
+    },
+    components: {
+      Slide
+    },
+    methods: {
+      async fetchProject() {
+        console.log('Fetching the projects')
+        try {
+          const response = await sanity.fetch(query)
+          this.projects = response
+        } catch(error) {
+          console.log('The error is: ', error)
+        }
+      }
+    },
+    created() {
+      this.fetchProject()
+    }
+  }
+</script>
+
+<style lang="scss" scoped>
+@import '@/styles/menu.scss';
+
+.centerContent {
+  position: absolute;
+  z-index: 100;
+  top: 0;
+  left: 0;
 }
 
-#nav {
-  padding: 30px;
+.menu {
+  position: fixed;
+  z-index: 200;
 }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+li {
+  font: {
+    family: 'McQueen';
+    size: 22px;
+  }
+  color: #fff;
+  margin-bottom: 22px;
 }
 
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
 </style>
