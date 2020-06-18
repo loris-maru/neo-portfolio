@@ -1,0 +1,51 @@
+/*---- TEXT -- TEXT -- TEXT -- TEXT ----*/
+
+@mixin text--super-desktop--large {
+  font-family: 'Oni';
+  font-variation-settings: 'wght' 100;
+  font-size: 3vw;
+  color: $--color--02;
+  line-height: 1.4;
+}
+
+@mixin text--super-desktop--medium {
+  font-family: 'Oni';
+  font-variation-settings: 'wght' 100;
+  font-size: 24px;
+  color: $--color--02;
+  line-height: 1.4;
+}
+
+@mixin text--super-desktop--small {
+  font-family: 'Oni';
+  font-variation-settings: 'wght' 200;
+  font-size: 1vw;
+  color: $--color--02;
+  line-height: 1.45;
+}
+
+
+/*----- TITLE MAIN -----*/
+@mixin title--super-desktop--4($color, $weight) {
+  font-family: 'McQueen';
+  font-variation-settings: 'wght' $weight;
+  font-size: 0.7vw;
+  color: $color;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+/*----- SUPER-DESKTOP -- H1 -----*/
+@mixin title--super-desktop--h1 {
+  font-family: 'Oni';
+  font-variation-settings: 'wght' 900;
+  font-size: 3.4vw;
+  color: $--color--02;
+}
+
+@mixin title--super-desktop--h2 {
+  font-family: 'Oni';
+  font-variation-settings: 'wght' 700;
+  font-size: 1.8vw;
+  color: $--color--02;
+}

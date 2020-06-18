@@ -1,7 +1,8 @@
 @import '@/styles/reset.scss';
-//@import '@/styles/mixins--desktop.scss';
-//@import '@/styles/mixins--super-desktop.scss';
-//@import '@/styles/mixins--mobile.scss';
+@import '@/styles/mixins--mobile.scss';
+@import '@/styles/mixins--desktop.scss';
+@import '@/styles/mixins--super-desktop.scss';
+@import '@/styles/menu.scss';
 
 /*–––– TYPOGRAPHY ––––*/
 @font-face {
@@ -19,14 +20,21 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-::-webkit-scrollbar {
-  display: none;
+html {
+  overflow: -moz-scrollbars-none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    width: 0 !important;
+  }
 }
 
-body {
+html, body {
   margin: 0 !important;
-  
+  overflow: hidden;
 }
+
+// INVISIBLE SCROLL BAR
+
 
 .marginXL {
   margin: 16vh 0;
@@ -45,6 +53,7 @@ $--weight--bold: 800;
 $--color--01: rgba(241, 153, 94, 1);
 $--color--02: rgba(42, 102, 131, 1);
 $--color--03: rgba(241, 231, 223, 1);
+$--color--04: rgba(247, 241, 236, 1);
 
 
 /*---- MEDIA QUERIES ----*/

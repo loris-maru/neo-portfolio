@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import Infos from '../views/Information.vue'
 
 Vue.use(VueRouter)
 
@@ -9,6 +10,17 @@ Vue.use(VueRouter)
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/informations',
+    name: 'informations',
+    component: Infos
+  },
+  {
+    path: '/project/:slug',
+    name: 'Project',
+    component: () => import('../views/Project.vue'),
+    props: true
   }
 ]
 
