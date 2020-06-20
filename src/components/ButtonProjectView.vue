@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import {TimelineLite} from 'gsap'
+import gsap from 'gsap'
 
   export default {
     props: {
@@ -27,12 +27,12 @@ import {TimelineLite} from 'gsap'
     methods: {
       animateButton(value, speed = 0.2) {
         const {buttonMain} = this.$refs
-        const timeline = new TimelineLite()
+        let timeline = gsap.timeline()
         timeline.to(buttonMain, speed, value)
       },
       animateText(value, speed = 0.6) {
         const {buttonLabel} = this.$refs
-        const timeline = new TimelineLite()
+        let timeline = gsap.timeline()
         timeline.to(buttonLabel, speed, value)
       }
     }

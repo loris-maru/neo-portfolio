@@ -1,19 +1,9 @@
 <template>
     <div id="burger"
-          :class="{'active': isBurgerActive}"
-          >
+          :class="{'active': isBurgerActive}">
 
-          <!--
-          <button type="button" class="burgerButton" title="Menu" @click.prevent="toggle"> -->
           <div class="burgerButton" @click.prevent="toggle">
 
-            <!--<img src="@/assets/images/menu_icon_lorisolivier.svg"
-              alt="menuButton"
-              class="menuButton"
-              width="22"
-              height="22"
-              :class="{'disappear': isBurgerActive}"
-              />-->
             <div class="iconToggle">
               <div class="dotOne" ref="dotOne"></div>
               <div class="dotTwo" ref="dotTwo"></div>
@@ -38,7 +28,7 @@
 
 <script>
 import { store, mutations} from '@/store'
-import {TimelineLite} from 'gsap'
+import gsap from 'gsap'
 
   export default {
     computed: {
@@ -50,8 +40,9 @@ import {TimelineLite} from 'gsap'
      toggle() {
         mutations.toggleNav()
 
+        let tl = new gsap.timeline()
+
         if (store.isNavOpen == true) {
-          const tl = new TimelineLite()
           tl.to(this.$refs.labelIndex, 0.2, {
             opacity: '1'
           })
@@ -82,7 +73,6 @@ import {TimelineLite} from 'gsap'
 
           // ELSE IF
         } else if (store.isNavOpen == false) {
-          const tl = new TimelineLite()
           tl.to(this.$refs.dotOne, 0.2, {
           width: '8px',
           height: '8px'

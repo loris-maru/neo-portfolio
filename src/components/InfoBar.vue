@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import {TimelineLite} from 'gsap'
+import gsap from 'gsap'
 
   export default {
     props: {
@@ -41,7 +41,7 @@ import {TimelineLite} from 'gsap'
     methods: {
       animateInfoBar(value, speed = 0.6) {
       const {infoBar} = this.$refs
-      const timeline = new TimelineLite()
+      let timeline = gsap.timeline()
       timeline.to(infoBar, speed, value)
     }
     }
@@ -52,20 +52,20 @@ import {TimelineLite} from 'gsap'
 <style lang="scss" scoped>
 
 .infoBarCore {
-  width: 50vw;
+  width: 42vw;
   display: flex;
   flex-flow: row nowrap;
   align-items: space-around;
 }
 
 section {
-  flex-basis: 25%;
+  flex-basis: 24%;
   margin-right: 80px;
   display: flex;
   flex-flow: column nowrap;
 
   &:nth-child(2) {
-    flex-basis: 10%;
+    flex-basis: 20%;
   }
 }
 

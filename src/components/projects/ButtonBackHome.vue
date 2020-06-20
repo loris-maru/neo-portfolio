@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import {TimelineLite} from 'gsap'
+import gsap from 'gsap'
 
   export default {
     data() {
@@ -23,12 +23,12 @@ import {TimelineLite} from 'gsap'
     },
     methods: {
       mouseEnter() {
-        const tl = new TimelineLite()
+        let tl = gsap.timeline()
         tl.to(this.$refs.iconButton, 0.4, {right: '0px'}, 0.1)
         tl.to(this.$refs.labelText, 0.6, {right: '-6px'}, 0.1)
       },
       mouseLeft() {
-        const tl = new TimelineLite()
+        let tl = gsap.timeline()
         tl.to(this.$refs.iconButton, 0.4, {right: '-80px'}, 0.2)
         tl.to(this.$refs.labelText, 0.4, {right: '6px'}, 0.2)
       }

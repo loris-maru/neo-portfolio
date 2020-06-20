@@ -44,8 +44,7 @@
 import sanity from '@/sanity'
 import imageUrlBuilder from '@sanity/image-url'
 const imageBuilder = imageUrlBuilder(sanity)
-import {TimelineLite} from 'gsap'
-
+import gsap from 'gsap'
 
 const query = `*[_type == 'footer'][0]{
   featuredProject,
@@ -87,12 +86,12 @@ const query = `*[_type == 'footer'][0]{
         return res
       },
       mouseHover() {
-        const tl = new TimelineLite()
+        let tl = gsap.timeline()
         tl.to(this.$refs.iconButton, 0.3, {left: '-60px'}, 0.2)
         tl.to(this.$refs.textButton, 0.3, {right: '8px'}, 0.1)
       },
       mouseByby() {
-        const tl = new TimelineLite()
+        let tl = gsap.timeline()
         tl.to(this.$refs.iconButton, 0.3, {left: '0'}, 0.2)
         tl.to(this.$refs.textButton, 0.3, {right: '-60px'}, 0.2)
       }

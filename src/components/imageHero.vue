@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import {TimelineLite} from 'gsap'
+import gsap from 'gsap'
 
   export default {
     props: {
@@ -46,8 +46,8 @@ import {TimelineLite} from 'gsap'
         const {heroImageNew, heroImageCurrent} = this.$refs
         heroImageNew.onload = () => {
           setTimeout(() => {
-            const speed = 0.7         
-            const timeline = new TimelineLite()
+            const speed = 0.7
+            let timeline = gsap.timeline()         
             timeline.to(heroImageCurrent, speed, {opacity: 0})
             timeline.to(heroImageNew, speed, {opacity: 1, onComplete: () => {
                 this.currentImg = this.newImg
@@ -81,18 +81,18 @@ import {TimelineLite} from 'gsap'
 },
       setImageRadius(value, speed = 1) {
         const {imageHero} = this.$refs
-        const timeline = new TimelineLite()
+        let timeline = gsap.timeline()
         timeline.to(imageHero, speed, {
           'border-radius': value
         })
       },
       animateImage(image, value, speed = 1.5) {
-        const timeline = new TimelineLite()
+        let timeline = gsap.timeline()
         timeline.to(image, speed, value)
       },
       animateCurrentImage(value, speed = 1) {
         const {heroImageCurrent} = this.$refs   
-        const timeline = new TimelineLite()    
+        let timeline = gsap.timeline()   
         timeline.to(heroImageCurrent, speed, value)
       }
     }

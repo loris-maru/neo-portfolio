@@ -23,7 +23,7 @@
 <script>
 import { store } from '@/store'
 import sanity from '@/sanity'
-import {TimelineLite} from 'gsap'
+import gsap from 'gsap'
 
 // Components
 import Menu from '@/components/Menu.vue'
@@ -69,7 +69,7 @@ const query = `*[_type == 'projects']{
         }
       },
       fadeInMenu() {
-        const tl = new TimelineLite()
+        let tl = gsap.timeline()
         if (this.isNavOpen == true) {
           tl.to(this.$refs.containerFilter, 0.4, {opacity: '0.7'})
         } else if (this.isNavOpen == false) {

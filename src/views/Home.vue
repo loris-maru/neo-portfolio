@@ -68,7 +68,8 @@ import imageUrlBuilder from '@sanity/image-url'
 const imageBuilder = imageUrlBuilder(sanity)
 
 // GSAP
-import {TimelineLite} from 'gsap'
+//import {TimelineLite} from 'gsap'
+import gsap from 'gsap'
 
 // Swiper
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
@@ -156,17 +157,17 @@ const query = `*[_type == 'projects']{
           opacity: 0
         })
 
-        const tlBackground = new TimelineLite()
+        let tlBackground = gsap.timeline()
         tlBackground.to(this.$refs.creamBackground, 0.3, {width: '100vw'})
         tlBackground.to(this.$refs.blueBackground, 0.4, {width: '100vw'})
 
-        const tlTitle = new TimelineLite()
+        let tlTitle = gsap.timeline()
         tlTitle.to(this.$refs.mainTitle, 0.2, {opacity: '0'})
       },
 
       // WHILE SCROLLING
       onChangeWholeScrolling() {
-        const tlTitle = new TimelineLite()
+        let tlTitle = gsap.timeline()
         tlTitle.to(this.$refs.mainTitle, 0.3, {opacity: '0'})
       },
 
@@ -189,19 +190,19 @@ const query = `*[_type == 'projects']{
           opacity: 1
         }, 1)
 
-        const tlBackground = new TimelineLite()
+        let tlBackground = gsap.timeline()
         tlBackground.to(this.$refs.blueBackground, 0.6, {width: '64vw'})
         tlBackground.to(this.$refs.creamBackground, 0.8, {width: '74vw'})
         this.currentProjectIndex = this.$refs.projSwiper.$swiper.realIndex
 
-        const tlTitle = new TimelineLite()
+        let tlTitle = gsap.timeline()
         tlTitle.to(this.$refs.mainTitle, 0.6, {opacity: '1'})
       },
       // ----------------
       // PAGE TRANSITION
       // ----------------
       redirectToProject(url) {
-        const headTimeline = new TimelineLite()
+        let headTimeline = gsap.timeline()
         
         this.$refs.infoBar.animateInfoBar({
           opacity: '0',

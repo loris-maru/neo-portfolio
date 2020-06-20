@@ -7,7 +7,8 @@
 </template>
 
 <script>
-import {TimelineLite} from 'gsap'
+import gsap from 'gsap'
+
   export default {
     props: {
       currentProjectNumber: {
@@ -22,7 +23,7 @@ import {TimelineLite} from 'gsap'
     methods: {
       animateCounter(value, speed = 0.4) {
         const {counterCore} = this.$refs
-        const tl = new TimelineLite()
+        let tl = gsap.timeline()
         tl.to(counterCore, speed, value)
       }
     }
