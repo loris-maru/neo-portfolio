@@ -7,29 +7,38 @@
           <button type="button" class="burgerButton" title="Menu" @click.prevent="toggle"> -->
           <div class="burgerButton" @click.prevent="toggle">
 
-            <img src="@/assets/images/menu_icon_lorisolivier.svg"
+            <!--<img src="@/assets/images/menu_icon_lorisolivier.svg"
               alt="menuButton"
               class="menuButton"
               width="22"
               height="22"
               :class="{'disappear': isBurgerActive}"
-              />
+              />-->
+            <div class="iconToggle">
+              <div class="dotOne" ref="dotOne"></div>
+              <div class="dotTwo" ref="dotTwo"></div>
+              <div class="dotThree" ref="dotThree"></div>
+              <div class="dotFour" ref="dotFour"></div>
+            </div>
 
-            <span v-if="!isBurgerActive" class="menuIndex">Index</span>
-            <span v-if="isBurgerActive" class="menuIndex">Close</span>
-            
+
+            <!-- <span v-if="!isBurgerActive" class="menuIndex">Index</span> -->
+            <span class="menuIndex" :class="{'appear': !isBurgerActive, 'index': isBurgerActive}">Index</span>
+            <span class="menuIndex" :class="{'appear': isBurgerActive, 'close': !isBurgerActive}">Close</span>
+
           <!--</button>-->
           </div>
-          <div class="divider" v-if="!isBurgerActive"></div>
+          <div class="divider" :class="{'appear': !isBurgerActive, 'index': isBurgerActive}"></div>
 
           <router-link to="/informations">
-              <span v-if="!isBurgerActive" class="menuIndex information">Infos</span>
+              <span :class="{'appear': !isBurgerActive}" class="menuIndex information">Infos</span>
           </router-link>
     </div>
 </template>
 
 <script>
 import { store, mutations} from '@/store'
+import {TimelineLite} from 'gsap'
 
   export default {
     computed: {
@@ -40,6 +49,59 @@ import { store, mutations} from '@/store'
     methods: {
      toggle() {
         mutations.toggleNav()
+
+        if (store.isNavOpen == true) {
+          const tl = new TimelineLite()
+          tl.to(this.$refs.labelIndex, 0.2, {
+            opacity: '1'
+          })
+          tl.to(this.$refs.dotOne, 0.2, {
+            width: '24px',
+            height: '4px',
+            top: 0,
+            left: '4px'
+          }, 0.1)
+          tl.to(this.$refs.dotTwo, 0.2, {
+            width: '24px',
+            height: '4px',
+            top: 0,
+            right: '4px'
+          }, 0.1)
+          tl.to(this.$refs.dotThree, 0.2, {
+            width: '24px',
+            height: '4px',
+            left: '4px',
+            bottom: '2px'
+          }, 0.1)
+          tl.to(this.$refs.dotFour, 0.2, {
+            width: '24px',
+            height: '4px',
+            bottom: '2px',
+            right: '4px'
+          }, 0.1)
+
+          // ELSE IF
+        } else if (store.isNavOpen == false) {
+          const tl = new TimelineLite()
+          tl.to(this.$refs.dotOne, 0.2, {
+          width: '8px',
+          height: '8px'
+          }, 0.1)
+          tl.to(this.$refs.dotTwo, 0.2, {
+            width: '8px',
+            height: '8px'
+          }, 0.1)
+          tl.to(this.$refs.dotThree, 0.2, {
+            width: '8px',
+            height: '8px',
+            bottom: '-2px'
+          }, 0.1)
+          tl.to(this.$refs.dotFour, 0.2, {
+            width: '8px',
+            height: '8px',
+            bottom: '-2px'
+          }, 0.1)
+        }
       }
     }
   }
@@ -52,6 +114,7 @@ import { store, mutations} from '@/store'
   top: $--spacer--S;
   left: $--spacer--S;
   display: flex;
+  flex-flow: row nowrap;
   cursor: pointer;
 
   img {
@@ -64,14 +127,12 @@ import { store, mutations} from '@/store'
   position: relative;
   top: 1px;
   @include desktop--subtitle--1($--color--02);
-  transition: all ease 0.4s;
-
-  &:hover {
-    background-size: 200px 20px;
-  }
+  opacity: 0;
 }
 
 .burgerButton {
+  display: flex;
+  flex-flow: row nowrap;
   border: none;
   background: transparent;
   margin: none;
@@ -91,6 +152,71 @@ a {
   width: 1px;
   height: 24px;
   margin: 0 26px;
+}
+
+/*------ ICON MENU ------*/
+.iconToggle {
+  position: relative;
+  top: -2px;
+  display: flex;
+  flex-flow: row wrap;
+  width: 24px;
+  height: 24px;
+  position: relative;
+  cursor: pointer;
+  margin-right: 24px;
+
+  .dotOne {
+    top: 0;
+    left: 4px;
+    transform: rotate(45deg);
+    transform-origin: top left;
+  }
+
+  .dotTwo {
+    top: 0;
+    right: 4px;
+    transform: rotate(-45deg);
+    transform-origin: top right;
+  }
+
+  .dotThree {
+    left: 4px;
+    bottom: -2px;
+    transform: rotate(-45deg);
+    transform-origin: bottom left;
+  }
+
+  .dotFour {
+    bottom: -2px;
+    right: 4px;
+    transform: rotate(45deg);
+    transform-origin: bottom right;
+  }
+}
+
+.dotOne, .dotTwo, .dotThree, .dotFour {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: $--color--02;
+  border-radius: 4px;
+
+  transition: all ease-in-out 0.4s;
+}
+
+.index {
+  display: none;
+}
+
+.close {
+  display: none;
+}
+
+.appear {
+  display: visible;
+  opacity: 1;
+  transition: all ease 0.8s;
 }
 
 /*------ TRANSITION ------*/

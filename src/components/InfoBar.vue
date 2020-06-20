@@ -59,10 +59,14 @@ import {TimelineLite} from 'gsap'
 }
 
 section {
-  /*flex-basis: 32%;*/
+  flex-basis: 25%;
   margin-right: 80px;
   display: flex;
   flex-flow: column nowrap;
+
+  &:nth-child(2) {
+    flex-basis: 10%;
+  }
 }
 
 h1 {

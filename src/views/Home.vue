@@ -293,7 +293,7 @@ h1 {
 .imageHero {
   position: fixed;
   z-index: 90;
-  right: 10vh;
+  right: -10vw;
 
   transition: all ease-in-out 0.6s;
 }
