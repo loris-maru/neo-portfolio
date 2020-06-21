@@ -2,12 +2,16 @@
   <div class="CentralSpine">
     <!-- IMAGE 1 -->
     <div class="imageContent">
-      <img :src="imageUrlFor(firstImage)">
+      <lazy-component>
+        <img :src="imageUrlFor(firstImage).auto('format').quality(70).fit('max')">
+      </lazy-component>
     </div>
 
     <!-- IMAGE 2 -->
     <div class="imageContent">
-      <img :src="imageUrlFor(secondImage)">
+      <lazy-component>
+        <img :src="imageUrlFor(secondImage).auto('format').quality(70).fit('max')">
+      </lazy-component>
     </div>
 
   </div>
@@ -56,7 +60,7 @@ const imageBuilder = imageUrlBuilder(sanity)
   and (max-device-width: 667px) 
   and (-webkit-min-device-pixel-ratio: 2) { 
     flex-flow: column nowrap;
-    padding: 80px 10vw;
+    padding: $--spacer--XS 10vw;
     }
 }
 

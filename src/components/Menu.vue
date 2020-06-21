@@ -61,6 +61,13 @@ const query = `*[_type == 'projects']{
   flex-flow: row wrap;
   align-items: space-between;
   padding: 160px 30px;
+
+  @media only screen 
+    and (min-device-width: 375px) 
+    and (max-device-width: 736px) 
+    and (orientation: portrait) { 
+      padding: 100px 22px;
+    }
 }
 
 .projectItems {
@@ -70,6 +77,13 @@ const query = `*[_type == 'projects']{
   and (min-device-width: 1920px) {
     flex-basis: 25%; 
   }
+
+  @media only screen 
+    and (min-device-width: 375px) 
+    and (max-device-width: 736px) 
+    and (orientation: portrait) { 
+      flex-basis: 100%;
+    }
 }
 
 .itemProjectMenu {
@@ -79,6 +93,13 @@ const query = `*[_type == 'projects']{
   and (min-device-width: 1920px) {
     margin-bottom: 160px;
   }
+
+  @media only screen 
+    and (min-device-width: 375px) 
+    and (max-device-width: 736px) 
+    and (orientation: portrait) { 
+      margin-bottom: 80px;
+    }
 }
 
 

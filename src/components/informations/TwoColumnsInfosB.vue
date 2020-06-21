@@ -9,13 +9,15 @@
     </div>
 
     <div class="imageBox">
-      <img :src="image" :alt="imgALT" />
+      <lazy-component>
+        <img :src="image" :alt="imgALT" />
+      </lazy-component>
     </div>
-    
   </div>
 </template>
 
 <script>
+
   export default {
     props: {
       subtitle: {
@@ -38,7 +40,7 @@
         type: Object,
         required: true
       }
-    } 
+    }
   }
 </script>
 
@@ -47,7 +49,7 @@
 .dualCore {
   display: flex;
   flex-flow: row nowrap;
-  padding: 150px 0;
+  padding: 130px 0;
 
   @media only screen 
   and (min-device-width: 375px) 
@@ -55,7 +57,7 @@
   and (-webkit-min-device-pixel-ratio: 2) { 
     display: flex;
     flex-flow: column wrap;
-    padding: 80px 0;
+    padding: 20px 0 0 $--spacer--XS;
     }
 }
 
@@ -86,7 +88,7 @@
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
-  width: 48.4%;
+  width: 57%;
   padding-right: 8vw;
 
   @media only screen 
@@ -137,5 +139,6 @@ p {
     @include text--mobile--small;
     }
 }
+
 
 </style>

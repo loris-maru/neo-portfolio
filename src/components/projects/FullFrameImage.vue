@@ -1,6 +1,8 @@
 <template>
   <div class="imgContainer">
-    <img :src="imageUrlFor(image)" alt="Image of the project" />
+    <lazy-component>
+    <img :src="imageUrlFor(image).auto('format').quality(70).fit('max')" alt="Image of the project" />
+    </lazy-component>
   </div>
 </template>
 

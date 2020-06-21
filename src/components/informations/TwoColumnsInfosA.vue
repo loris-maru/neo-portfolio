@@ -1,7 +1,9 @@
 <template>
   <div class="dualCore">
     <div class="imageBox">
-      <img :src="image" :alt="imgALT" />
+      <lazy-component>
+        <img :src="image" :alt="imgALT" />
+      </lazy-component>
     </div>
     <div class="textBox">
       <h2>{{subtitle}}</h2>
@@ -45,7 +47,7 @@
 .dualCore {
   display: flex;
   flex-flow: row nowrap;
-  padding: 150px 0;
+  padding: 130px 0;
 
   @media only screen 
   and (min-device-width: 375px) 
@@ -53,12 +55,12 @@
   and (-webkit-min-device-pixel-ratio: 2) { 
     display: flex;
     flex-flow: column wrap;
-    padding: 20px 0;
+    padding: 20px 0 0 $--spacer--XS;
     }
 }
 
 .imageBox {
-  width: 48.4%;
+  width: 46%;
 
   img {
     width: 100%;

@@ -61,6 +61,15 @@ import gsap from 'gsap'
     transform: scale(1.03);
     border-width: 5px;
   }
+
+  @media only screen 
+    and (min-device-width: 375px) 
+    and (max-device-width: 736px) 
+    and (orientation: portrait) {
+      width: 150px;
+      height: 150px;
+      background: rgba(42, 102, 131, 0.82);;
+  }
 }
 
 button {
@@ -68,15 +77,23 @@ button {
   background: transparent;
   border: none;
   top: -8px;
-  font: {
+  font: { 
     family: 'Oni';
-    size: 2.6vw;
+    size: 72px;
     variation-settings: 'wght' $--weight--medium;
   }
   color: $--color--01;
   text-transform: uppercase;
   line-height: 1;
   letter-spacing: 0.09em;
+
+  @media only screen 
+    and (min-device-width: 375px) 
+    and (max-device-width: 736px) 
+    and (orientation: portrait) {
+      top: 0;
+      font-size: 22px;
+  }
 }
 
 </style>

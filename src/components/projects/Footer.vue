@@ -111,16 +111,16 @@ const query = `*[_type == 'footer'][0]{
   flex-flow: row nowrap;
   justify-content: flex-start;
   width: 70vw;
-  //height: 500px;
   background: $--color--02;
-  padding: 80px;
+  padding: 140px 120px;
 
   @media only screen 
   and (min-device-width: 375px) 
   and (max-device-width: 667px) 
-  and (-webkit-min-device-pixel-ratio: 2) { 
+  and (-webkit-min-device-pixel-ratio: 2) {
+    width: 74vw;
     flex-flow: column nowrap;
-    padding: 120px 8vw;
+    padding: 50px $--spacer--XS;
     }
 }
 
@@ -145,6 +145,15 @@ button {
   &:hover{
     background: #1D5672;
   }
+}
+
+.buttonBackHome {
+  @media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 667px) 
+  and (-webkit-min-device-pixel-ratio: 2) { 
+    display: none;
+    }
 }
 
 .labelButton {

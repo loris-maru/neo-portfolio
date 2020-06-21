@@ -13,12 +13,12 @@
 
 
             <!-- <span v-if="!isBurgerActive" class="menuIndex">Index</span> -->
-            <span class="menuIndex" :class="{'appear': !isBurgerActive, 'index': isBurgerActive}">Index</span>
+            <span class="menuIndex mobileVisibility" :class="{'appear': !isBurgerActive, 'index': isBurgerActive}">Index</span>
             <span class="menuIndex" :class="{'appear': isBurgerActive, 'close': !isBurgerActive}">Close</span>
 
           <!--</button>-->
           </div>
-          <div class="divider" :class="{'appear': !isBurgerActive, 'index': isBurgerActive}"></div>
+          <div class="divider mobileVisibility" :class="{'appear': !isBurgerActive, 'index': isBurgerActive}"></div>
 
           <router-link to="/informations">
               <span :class="{'appear': !isBurgerActive}" class="menuIndex information">Infos</span>
@@ -111,6 +111,14 @@ import gsap from 'gsap'
     margin-right: 30px;
     transition: all 0.4s ease-in-out;
   }
+
+  @media only screen 
+    and (min-device-width: 375px) 
+    and (max-device-width: 736px) 
+    and (orientation: portrait) { 
+      top: 30px;
+      left: 30px;
+  }
 }
 
 .menuIndex {
@@ -155,6 +163,13 @@ a {
   position: relative;
   cursor: pointer;
   margin-right: 24px;
+
+  @media only screen 
+    and (min-device-width: 375px) 
+    and (max-device-width: 736px) 
+    and (orientation: portrait) { 
+      margin-right: 12px;
+  }
 
   .dotOne {
     top: 0;
@@ -220,6 +235,15 @@ a {
 .fading-leave-to {
   opacity: 0;
   transition: all transform 0.6s ease;
+}
+
+.mobileVisibility {
+  @media only screen 
+    and (min-device-width: 375px) 
+    and (max-device-width: 736px) 
+    and (orientation: portrait) { 
+      display: none;
+  }
 }
 
 </style>

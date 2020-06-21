@@ -3,8 +3,6 @@
     <p>
       {{content}}
     </p>
-    
-
   </div>
 </template>
 
@@ -30,6 +28,12 @@
   display: flex;
   flex-flow: column nowrap;
   padding: $--spacer--L 10vw;
+  @media only screen 
+    and (min-device-width: 375px) 
+    and (max-device-width: 667px) 
+    and (-webkit-min-device-pixel-ratio: 2) { 
+      padding: $--spacer--S $--spacer--XS;
+    }
 }
 
 p {
@@ -46,6 +50,7 @@ p {
     and (max-device-width: 667px) 
     and (-webkit-min-device-pixel-ratio: 2) { 
       @include text--mobile--large;
+      margin-bottom: 20px;
     }
 }
 

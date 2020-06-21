@@ -4,11 +4,11 @@
       <h2>Project #{{projectNumber}}</h2>
       <h1>{{projectName}}</h1>
     </section>
-    <section>
+    <section class="mobileVisibility">
       <h2>Field</h2>
       <h1>{{projectField}}</h1>
     </section>
-    <section>
+    <section class="mobileVisibility">
       <h2>Year</h2>
       <h1>{{projectYear}}</h1>
     </section>
@@ -56,6 +56,13 @@ import gsap from 'gsap'
   display: flex;
   flex-flow: row nowrap;
   align-items: space-around;
+
+  @media only screen 
+    and (min-device-width: 375px) 
+    and (max-device-width: 736px) 
+    and (orientation: portrait) { 
+      width: 50vw;
+  }
 }
 
 section {
@@ -67,15 +74,42 @@ section {
   &:nth-child(2) {
     flex-basis: 20%;
   }
+
+  &:first-child {
+    @media only screen 
+    and (min-device-width: 375px) 
+    and (max-device-width: 736px) 
+    and (orientation: portrait) { 
+      flex-basis: 100%;
+      margin: 0;
+  }
+  }
 }
 
 h1 {
   @include desktop--title--1($--color--01);
   margin-top: 12px;
+
+  @media only screen 
+    and (min-device-width: 375px) 
+    and (max-device-width: 736px) 
+    and (orientation: portrait) { 
+      position: relative;
+      top: -6px;
+  }
 }
 
 h2 {
   @include desktop--subtitle--1($--color--01);
+}
+
+.mobileVisibility {
+  @media only screen 
+    and (min-device-width: 375px) 
+    and (max-device-width: 736px) 
+    and (orientation: portrait) { 
+    display: none;
+  }
 }
 
 </style>

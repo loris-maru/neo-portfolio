@@ -72,6 +72,14 @@ import { store, mutations } from '@/store'
   and (min-device-width: 1920px) {
     overflow: hidden;
   }
+
+  @media only screen 
+    and (min-device-width: 375px) 
+    and (max-device-width: 736px) 
+    and (orientation: portrait) { 
+      padding-left: 12px;
+    }
+
 }
 
 

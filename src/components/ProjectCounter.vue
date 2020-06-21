@@ -39,6 +39,13 @@ import gsap from 'gsap'
   align-items: center;
   padding-bottom: $--spacer--XS;
   border-bottom: solid 10px $--color--01;
+
+  @media only screen 
+    and (min-device-width: 375px) 
+    and (max-device-width: 736px) 
+    and (orientation: portrait) { 
+      width: 120px;
+  }
 }
 
 .divider {
@@ -46,6 +53,13 @@ import gsap from 'gsap'
   height: 1px;
   background: $--color--01;
   margin: 0 22px;
+
+  @media only screen 
+    and (min-device-width: 375px) 
+    and (max-device-width: 736px) 
+    and (orientation: portrait) { 
+      margin: 0 10px;
+  }
 }
 
   h1 {

@@ -12,7 +12,9 @@
 
     <!-- I M A G E -->
     <div class="imageContent">
-      <img :src="imageUrlFor(image)">
+      <lazy-component>
+        <img :src="imageUrlFor(image).auto('format').quality(70).fit('max')">
+      </lazy-component>
     </div>
 
   </div>
@@ -70,7 +72,7 @@ const imageBuilder = imageUrlBuilder(sanity)
   and (max-device-width: 667px) 
   and (-webkit-min-device-pixel-ratio: 2) { 
     flex-flow: column nowrap;
-    padding: $--spacer--L 10vw;
+    padding: $--spacer--XS 10vw;
     }
 }
 

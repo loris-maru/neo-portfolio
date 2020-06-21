@@ -2,6 +2,8 @@
   <div class="coreInfo">
 
     <div class="contentCore">
+
+    <BackButton class="backButton" />
       
     <HeaderInfos 
       :subtitle="information.headSubtitle"
@@ -10,7 +12,7 @@
       />
 
     <!-- FULL PAGE Image -->
-    <ImageL :imageFull="imageUrlFor(information.dividerImage)" />
+    <ImageL :imageFull="imageUrlFor(information.dividerImage).auto('format').quality(70).fit('max')" class="imgFullpage" />
 
     <p>
       {{information.introBiography}}
@@ -40,7 +42,8 @@
           :title="place.title"
           :content="place.content"
           v-if="placeNum%2 == 0"
-          :image="imageUrlFor(place.image)"
+          :image="imageUrlFor(place.image).auto('format').quality(70).fit('max')"
+          class="marginBottom"
           />
         <TwoColumnsInfosB
           :imgALT="place.altIMG"
@@ -48,7 +51,8 @@
           :title="place.title"
           :content="place.content"
           v-if="placeNum%2 == 1"
-          :image="imageUrlFor(place.image)"
+          :image="imageUrlFor(place.image).auto('format').quality(70).fit('max')"
+          class="marginBottom"
           />
       </div>
     </div>
@@ -57,7 +61,6 @@
 
     <Footer class="footer" />
 
-    <aside></aside>
   </div>
 </template>
 
@@ -74,6 +77,7 @@ import TableItem from '@/components/informations/TableItem.vue'
 import TwoColumnsInfosA from '@/components/informations/TwoColumnsInfosA.vue'
 import TwoColumnsInfosB from '@/components/informations/TwoColumnsInfosB.vue'
 import Footer from '@/components/projects/Footer.vue'
+import BackButton from '@/components/BackButton.vue'
 
 const query = `*[_type == 'information'][0]{
   headTitle,
@@ -101,7 +105,8 @@ export default {
     TwoColumnsInfosA,
     TwoColumnsInfosB,
     Footer,
-    ImageL
+    ImageL,
+    BackButton
   },
   methods: {
       async fetchInformations() {
@@ -127,20 +132,8 @@ export default {
 
 <style lang="scss" scoped>
 
-aside {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 40px;
-  height: 100%;
-  background: $--color--02;
-
-  @media only screen 
-  and (min-device-width: 375px) 
-  and (max-device-width: 667px) 
-  and (-webkit-min-device-pixel-ratio: 2) { 
-    width: 10px;
-    }
+.coreInfo {
+  padding-right: 40px;
 }
 
 .navBloc {
@@ -151,10 +144,12 @@ aside {
 }
 
 .contentCore {
+  width: 95.3vw;
   position: relative;
-  width: calc(100% - 40px);
+  left: 0;
+  overflow: hidden;
   min-height: 100vh;
-  padding: 200px 0;
+  padding: 200px 10vw;
 
   @media only screen 
   and (min-device-width: 375px) 
@@ -162,33 +157,33 @@ aside {
   and (-webkit-min-device-pixel-ratio: 2) { 
     width: calc(100% - 16px);
     margin-bottom: 0;
-    padding: 140px 0;
+    padding: 140px 0 80px 0;
     }
 }
 
 .tableTitle {
   @include title--desktop--h1;
-  padding: 0 10vw;
-  margin-top: 160px;
+  margin-top: 120px;
 
   @media only screen 
   and (min-device-width: 375px) 
   and (max-device-width: 667px) 
   and (-webkit-min-device-pixel-ratio: 2) {
-    @include title--mobile--h1; 
+    @include title--mobile--1($--color--02, $--weight--bold);
     margin-top: 60px;
+    padding-left: $--spacer--XS;
     }
 }
 
 p {
-  @include text--desktop--medium;
-  padding: 60px 10vw;
+  @include text--desktop--large;
+  padding: 100px 0;
 
   @media only screen 
   and (min-device-width: 375px) 
   and (max-device-width: 667px) 
   and (-webkit-min-device-pixel-ratio: 2) { 
-    padding: 30px 10vw;
+    padding: 30px 0 30px $--spacer--XS;
     @include text--mobile--medium;
     line-height: 1.4;
     }
@@ -198,7 +193,7 @@ p {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
-  padding: 120px 10vw;
+  padding: 80px 0;
 
   @media only screen 
   and (min-device-width: 375px) 
@@ -206,7 +201,7 @@ p {
   and (-webkit-min-device-pixel-ratio: 2) { 
     display: flex;
     flex-flow: column wrap;
-    padding: 50px 10vw;
+    padding: 50px 0 0 $--spacer--XS;
     }
 }
 
@@ -227,22 +222,50 @@ p {
 }
 
 .educationTable {
-  padding: 40px 10vw;
+  padding-top: 40px;
+}
+
+.imgFullpage {
+  position: relative;
+  left: 0;
 }
 
 .footer {
-  position: absolute;
-  right: 0;
+  position: relative;
+  left: 28vw;
   margin-bottom: 200px; 
 
   @media only screen 
     and (min-device-width: 375px) 
     and (max-device-width: 667px) 
     and (-webkit-min-device-pixel-ratio: 2) {
-      left: 0;
+      left: 11.5vw;
       margin-bottom: 120px;
     }
 }
 
+.backButton {
+  position: fixed;
+  top: 50px;
+  right: 130px;
+  z-index: 9999;
+
+  @media only screen 
+    and (min-device-width: 375px) 
+    and (max-device-width: 667px) 
+    and (-webkit-min-device-pixel-ratio: 2) {
+      top: 20px;
+      right: 20px;
+    }
+}
+
+.marginBottom {
+  @media only screen 
+    and (min-device-width: 375px) 
+    and (max-device-width: 667px) 
+    and (-webkit-min-device-pixel-ratio: 2) {
+      margin-bottom: 80px;
+    }
+}
 
 </style>

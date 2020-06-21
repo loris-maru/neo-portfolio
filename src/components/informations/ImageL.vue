@@ -1,6 +1,8 @@
 <template>
   <div class="imageContainer">
-    <img :src="imageFull" alt="Image of the biography and CV of Loris Olivier" />
+    <lazy-component>
+      <img :src="imageFull" alt="Image of the biography and CV of Loris Olivier" />
+    </lazy-component>
   </div>
 </template>
 
@@ -18,7 +20,8 @@
 <style lang="scss" scoped>
 
 .imageContainer {
-  padding: $--spacer-MEGA 0;
+  padding: $--spacer--L 0;
+  overflow: hidden;
   
   img {
     width: 100%;
@@ -29,7 +32,7 @@
   and (min-device-width: 375px) 
   and (max-device-width: 667px) 
   and (-webkit-min-device-pixel-ratio: 2) { 
-    padding: $--spacer--M 0;
+    padding: $--spacer--S $--spacer--XS;
     }
 }
 

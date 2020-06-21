@@ -23,7 +23,7 @@
 
     <imageHero
       ref="projIMG"
-      :imageURL="imageUrlFor(currentProject.heroImage).auto('format').quality(70).fit('max')"
+      :imageURL="imageUrlFor(currentProject.heroImage).auto('format').quality(70).fit('max').maxWidth(1200).maxHeight(1200)"
       class="imageHero"
       :imageALT="currentProject.headline"
       />
@@ -41,8 +41,7 @@
       :options="swiperOptionh"
       @transitionStart="onStartScrolling"
       @transitionEnd="onEndScrolling"
-      @slideChange="onChangeWholeScrolling"
-      >     
+      @slideChange="onChangeWholeScrolling">     
 
         <swiper-slide class="slideFull" v-for="(proj, projNum) in projects" :key="projNum">
           <h1 class="headlineTitle" ref="mainTitle">
@@ -103,7 +102,8 @@ const query = `*[_type == 'projects']{
           mousewheel: true,
           direction: 'horizontal',
           slidesPerView: 1,
-          speed: 900
+          speed: 1200,
+          sensitivity: 3
         }
       }
     },
@@ -146,57 +146,75 @@ const query = `*[_type == 'projects']{
           borderRadius: '0%',
           height: '100vh',
           top: '0'
-        }, this.$options.animationSpeed)
-        
+        }, 0.8)     
         this.$refs.buttonView.animateButton({
           transform: 'scale(0.92)',
-          opacity: 0
+          opacity: '0'
         })
-
         this.$refs.buttonView.animateText({
-          opacity: 0
+          opacity: '0'
         })
-
-        let tlBackground = gsap.timeline()
-        tlBackground.to(this.$refs.creamBackground, 0.3, {width: '100vw'})
-        tlBackground.to(this.$refs.blueBackground, 0.4, {width: '100vw'})
-
-        let tlTitle = gsap.timeline()
-        tlTitle.to(this.$refs.mainTitle, 0.2, {opacity: '0'})
+        gsap.to('.blueBackground', {
+          duration: 1,
+          width: '78vw',
+          ease: 'easeOut'
+        })
+        gsap.to('.creamBackground', {
+          duration: 1.2,
+          width: '86vw',
+          ease: 'easeOut'
+        })
+        gsap.to(this.$refs.mainTitle, {
+          duration: 0.3,
+          opacity: '0',
+          ease: 'easeOut'
+        })
       },
 
       // WHILE SCROLLING
       onChangeWholeScrolling() {
-        let tlTitle = gsap.timeline()
-        tlTitle.to(this.$refs.mainTitle, 0.3, {opacity: '0'})
+        gsap.to(this.$refs.mainTitle, {
+          duration: 0.3, 
+          opacity: '0.3'
+        })
       },
 
       // END scrolling
       onEndScrolling() {
+        this.currentProjectIndex = this.$refs.projSwiper.$swiper.realIndex
         // ANIMATE the image
         this.$refs.projIMG.animateCurrentImage({
           borderRadius: '50%',
           height: '90vh',
           top: '5vh'
-        }, this.$options.animationSpeed)
+        }, 0.8)
 
         // ANIMATE the button
         this.$refs.buttonView.animateButton({
           transform: 'scale(1)',
-          opacity: 1
+          opacity: '1'
         })
 
         this.$refs.buttonView.animateText({
-          opacity: 1
+          opacity: '1'
         }, 1)
 
-        let tlBackground = gsap.timeline()
-        tlBackground.to(this.$refs.blueBackground, 0.6, {width: '64vw'})
-        tlBackground.to(this.$refs.creamBackground, 0.8, {width: '74vw'})
-        this.currentProjectIndex = this.$refs.projSwiper.$swiper.realIndex
+        gsap.to('.blueBackground', {
+          duration: 1.2,
+          width: '64vw',
+          ease: 'easeOut'
+        })
 
-        let tlTitle = gsap.timeline()
-        tlTitle.to(this.$refs.mainTitle, 0.6, {opacity: '1'})
+        gsap.to('.creamBackground', {
+          duration: 1.5,
+          width: '74vw',
+          ease: 'easeOut'
+        })
+
+        gsap.to(this.$refs.mainTitle, {
+          duration: 0.3,
+          opacity: '1'
+        })
       },
       // ----------------
       // PAGE TRANSITION
@@ -212,11 +230,12 @@ const query = `*[_type == 'projects']{
         this.$refs.buttonView.animateButton({
           opacity: '0'
         })
+
         this.$refs.projCounter.animateCounter({
           opacity: '0',
           top: '-150px'
         })
-          
+
         headTimeline.to(this.$refs.mainTitle, 0.3, {opacity: '0', onComplete: () => {
 
           this.$refs.projIMG.animateCurrentImage({
@@ -229,7 +248,7 @@ const query = `*[_type == 'projects']{
               this.$refs.projIMG.animateCurrentImage({
                 right: '-60vw'
               })
-                headTimeline.to(this.$refs.creamBackground, 0.4, {width: '50vw',
+                headTimeline.to(this.$refs.creamBackground, 0.4, {width: '2vw',
                 onComplete: () => {
                   this.$router.push(url)
                 }
@@ -239,8 +258,9 @@ const query = `*[_type == 'projects']{
           
         }})// End of $refs.mainTitle
       //----------------------------  
-      } // END of REDIRECTTOPROJECT()
+      } // END of REDIRECT TO PROJECT()
     },
+
     created() {
       this.$options.animationSpeed = 0.25
       this.fetchProject()
@@ -263,6 +283,15 @@ h1 {
   }
   color: $--color--01;
   line-height: 1.1;
+
+  @media only screen 
+    and (min-device-width: 375px) 
+    and (max-device-width: 736px) 
+    and (orientation: portrait) { 
+    font-size: 68px;
+    left: 8vw;
+    top: -2vw;
+  }
 }
 
 /*------ SLIDER ------*/
@@ -297,6 +326,13 @@ h1 {
   right: -10vw;
 
   transition: all ease-in-out 0.6s;
+
+  @media only screen 
+    and (min-device-width: 375px) 
+    and (max-device-width: 736px) 
+    and (orientation: portrait) { 
+    right: -18vw;
+  }
 }
 
 .infoBar {
@@ -306,6 +342,14 @@ h1 {
   z-index: 4000;
 
   transition: all ease-in-out 0.6s;
+
+  @media only screen 
+    and (min-device-width: 375px) 
+    and (max-device-width: 736px) 
+    and (orientation: portrait) { 
+    top: 30px;
+    left: 44vw;
+  }
 }
 
 .projectCounter {
@@ -315,6 +359,13 @@ h1 {
   z-index: 4000;
 
   transition: all ease-in-out 0.6s;
+
+  @media only screen 
+    and (min-device-width: 375px) 
+    and (max-device-width: 736px) 
+    and (orientation: portrait) { 
+    left: 44vw;
+  }
 }
 
 .buttonCore {
@@ -323,7 +374,14 @@ h1 {
   z-index: 8500;
   right: 22vw;
   opacity: 1;
-}
+    @media only screen 
+      and (min-device-width: 375px) 
+      and (max-device-width: 736px) 
+      and (orientation: portrait) { 
+      right: 14vw;
+      top: 58vh;
+    }
+  }
 
 /*------ BACKGROUND ------*/
 

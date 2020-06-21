@@ -1,10 +1,12 @@
 <template>
   <div class="imageCore">
     <div ref="imageHero" class="imageContent">
-      <!-- CURRENT IMAGE -->
-      <img ref="heroImageCurrent" class="heroImage current" :src="currentImg" :alt="imageALT" />
-      <!-- NEW IMAGE -->
-      <img v-show="!!newImg" v-if="newImg" ref="heroImageNew" class="heroImage new" :src="newImg" :alt="imageALT" />
+      <lazy-component>
+        <!-- CURRENT IMAGE -->
+        <img ref="heroImageCurrent" class="heroImage current" :src="currentImg" :alt="imageALT" />
+        <!-- NEW IMAGE -->
+        <img v-show="!!newImg" v-if="newImg" ref="heroImageNew" class="heroImage new" :src="newImg" :alt="imageALT" />
+      </lazy-component>
     </div>
   </div>
 </template>
@@ -111,8 +113,8 @@ import gsap from 'gsap'
   and (min-device-width: 375px) 
   and (max-device-width: 667px) 
   and (-webkit-min-device-pixel-ratio: 2) { 
-    width: 90vh;
-    height: 90vh;
+    width: 50vh;
+    height: 50vh;
   }
 }
 
@@ -131,6 +133,14 @@ import gsap from 'gsap'
     &.new {
       opacity: 0;
     }
+
+    @media only screen 
+    and (min-device-width: 375px) 
+    and (max-device-width: 736px) 
+    and (orientation: portrait) {
+      top: 20vh;
+      height: 60vh;
+  }
 }
 
 img {

@@ -44,7 +44,7 @@
 .contentCenter {
   display: flex;
   flex-flow: row nowrap;
-  padding: 60px 10vw;
+  padding: 60px 0;
 
   @media only screen 
   and (min-device-width: 375px) 
@@ -52,7 +52,7 @@
   and (-webkit-min-device-pixel-ratio: 2) { 
     display: flex;
     flex-flow: column nowrap;
-    padding: 0 30px;
+    padding: 0 10px 0 $--spacer--XS;
     }
   }
 
@@ -68,6 +68,7 @@
   and (max-device-width: 667px) 
   and (-webkit-min-device-pixel-ratio: 2) { 
     width: 100%;
+    padding: 0;
     }
 }
 

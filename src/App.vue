@@ -69,11 +69,16 @@ const query = `*[_type == 'projects']{
         }
       },
       fadeInMenu() {
-        let tl = gsap.timeline()
+        //let tl = gsap.timeline()
         if (this.isNavOpen == true) {
-          tl.to(this.$refs.containerFilter, 0.4, {opacity: '0.7'})
+          gsap.to('.filterBlock', {
+            duration: 0.4, 
+            opacity: 0.7,
+            ease: 'bounce.out'
+          })
+          //tl.to(this.$refs.containerFilter, 0.4, {opacity: '0.7'})
         } else if (this.isNavOpen == false) {
-          tl.to(this.$refs.containerFilter, 0.4, {opacity: '0'})
+          //tl.to(this.$refs.containerFilter, 0.4, {opacity: '0'})
         }
       }
     },
@@ -85,9 +90,6 @@ const query = `*[_type == 'projects']{
 
 <style lang="scss" scoped>
 
-.coreApp {
-  overflow: hidden;
-}
 
 .centerContent {
   position: absolute;
@@ -107,6 +109,14 @@ const query = `*[_type == 'projects']{
   top: 40px;
   left: 40px;
   z-index: 9000;
+  
+  @media only screen 
+    and (min-device-width: 375px) 
+    and (max-device-width: 736px) 
+    and (orientation: portrait) { 
+      top: 9px;
+      left: 10px;
+  }
 }
 
 li {
@@ -126,17 +136,17 @@ li {
   width: 2vw;
   height: 100vh;
   background: $--color--02;
-  z-index: 0;
+  z-index: 1;
 }
 
 .creamContainer {
   position: fixed;
   top: 0;
   right: 2vw;
-  width: 50vw;
+  width: 2vw;
   height: 120vh;
   background: $--color--04;
-  z-index: 0;
+  z-index: 1;
   opacity: 1;
 }
 

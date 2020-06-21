@@ -1,5 +1,7 @@
 <template>
   <div ref="projectBody" class="projectBody">
+
+    <BackButton class="backButton" />
     
     <div v-if="project" class="contentCore">
       <transition-group name="fade" tag="div" appear>
@@ -33,6 +35,7 @@ import TwoColumns_IMGText from '@/components/projects/TwoColumns_IMG-Text.vue'
 import TwoColumns_TextIMG from '@/components/projects/TwoColumns_Text-IMG.vue'
 import FeatureDetail from '@/components/projects/FeatureDetail.vue'
 import Text from '@/components/projects/TextLevelOne.vue'
+import BackButton from '@/components/BackButton.vue'
 
 // Plugins
 import sanity from '@/sanity'
@@ -59,7 +62,8 @@ const COMPONENT_MAP = {
       Header,
       ImageFull,
       DualOne,
-      Footer
+      Footer,
+      BackButton
     },
     data() {
       return {
@@ -149,7 +153,7 @@ aside {
     and (min-device-width: 375px) 
     and (max-device-width: 667px) 
     and (-webkit-min-device-pixel-ratio: 2) {
-      left: 0;
+      left: 11.5vw;
       margin-bottom: 120px;
     }
 
@@ -166,7 +170,8 @@ aside {
   @media only screen 
   and (min-device-width: 375px) 
   and (max-device-width: 667px) 
-  and (-webkit-min-device-pixel-ratio: 2) { 
+  and (-webkit-min-device-pixel-ratio: 2) {
+    padding-top: 50px;
     width: calc(100% - 16px);
     margin-bottom: 200px;
     }
@@ -208,5 +213,19 @@ aside {
   opacity: 1;
 }
 
+.backButton {
+  position: fixed;
+  top: 50px;
+  right: 130px;
+  z-index: 9999;
+
+  @media only screen 
+    and (min-device-width: 375px) 
+    and (max-device-width: 667px) 
+    and (-webkit-min-device-pixel-ratio: 2) {
+      top: 20px;
+      right: 20px;
+    }
+}
 
 </style>

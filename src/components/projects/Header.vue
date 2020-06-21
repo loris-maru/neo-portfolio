@@ -118,7 +118,7 @@ h1 {
   and (max-device-width: 667px) 
   and (-webkit-min-device-pixel-ratio: 2) { 
     @include title--mobile--h1;
-    line-height: 1.32;
+    line-height: 1.2;
     margin-bottom: 18px;
     }
 }
@@ -160,7 +160,7 @@ p {
   and (max-device-width: 667px) 
   and (-webkit-min-device-pixel-ratio: 2) { 
     @include text--mobile--medium;
-    padding: 60px 0 20px 0;
+    padding: 46px 0 0 0;
     }
 }
 
@@ -172,10 +172,31 @@ p {
 
 section {
   margin-right: 60px;
+
+  @media only screen 
+    and (min-device-width: 375px) 
+    and (max-device-width: 667px) 
+    and (-webkit-min-device-pixel-ratio: 2) {
+      margin-right: 40px;
+      &:first-child {
+        flex-basis: 20%;
+      }
+      &:last-child {
+        flex-basis: 80%;
+      }
+    }
+
 }
 
 section h3 {
   margin: 12px 0;
+
+  @media only screen 
+    and (min-device-width: 375px) 
+    and (max-device-width: 667px) 
+    and (-webkit-min-device-pixel-ratio: 2) {
+      margin: 6px 0;
+    }
 }
 
 

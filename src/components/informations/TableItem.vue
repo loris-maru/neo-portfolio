@@ -74,7 +74,7 @@ h1 {
   and (min-device-width: 375px) 
   and (max-device-width: 667px) 
   and (-webkit-min-device-pixel-ratio: 2) { 
-    @include title--mobile--1($--color--02, $--weight--bold);
+    @include title--mobile--2($--color--02, $--weight--bold);
     line-height: 1.2;
     }
 }
