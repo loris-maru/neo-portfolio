@@ -9,9 +9,9 @@ export default new Vuex.Store({
   },
   ////////////
   mutations: {
-    toggleNav() {
-     this.isNavOpen = !this.isNavOpen
-     console.log('The Nav is Open: ', this.state.isNavOpen)
+    toggleNav(state) {
+      state.isNavOpen = !state.isNavOpen
+      console.log('The Nav is Open: ', state.isNavOpen)
     }
   },
   ///////////

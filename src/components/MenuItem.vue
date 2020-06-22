@@ -5,7 +5,9 @@
       <h2>{{projectCategory}}</h2>
     </section>
     <h1>
-      {{projectName}}
+      <router-link :to="`/project/${projectSlug}`" @click.native="$store.commit('toggleNav')">
+        {{projectName}}
+      </router-link>
     </h1>
 
   </div>
@@ -25,6 +27,10 @@
       projectName: {
         type: String, 
         default: 'My Project'
+      },
+      projectSlug: {
+        type: String,
+        required: true
       }
     }
   }

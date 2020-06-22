@@ -1,5 +1,5 @@
 <template>
-    <div id="burger"
+    <div v-if="showBurger" id="burger"
           :class="{'active': isBurgerActive}">
 
           <div class="burgerButton" @click.prevent="toggle">
@@ -27,22 +27,33 @@
 </template>
 
 <script>
-import { store, mutations} from '@/store'
 import gsap from 'gsap'
 
   export default {
+    created() {
+      console.log('route', this.$route)
+    },
     computed: {
       isBurgerActive() {
-        return store.isNavOpen
+        return this.$store.state.isNavOpen
+      },
+      showBurger() {
+        const routesToHideOn = ['/informations']
+        if (routesToHideOn.includes(this.$route.fullPath)) return false
+        return true
       }
+    },
+    watch: {
+      isBurgerActive: 'animateBurger'
     },
     methods: {
      toggle() {
-        mutations.toggleNav()
+        this.$store.commit('toggleNav')
+     },
+     animateBurger() {
+       let tl = new gsap.timeline()
 
-        let tl = new gsap.timeline()
-
-        if (store.isNavOpen == true) {
+        if (this.$store.state.isNavOpen == true) {
           tl.to(this.$refs.labelIndex, 0.2, {
             opacity: '1'
           })
@@ -72,7 +83,7 @@ import gsap from 'gsap'
           }, 0.1)
 
           // ELSE IF
-        } else if (store.isNavOpen == false) {
+        } else if (this.$store.state.isNavOpen == false) {
           tl.to(this.$refs.dotOne, 0.2, {
           width: '8px',
           height: '8px'
@@ -93,7 +104,8 @@ import gsap from 'gsap'
           }, 0.1)
         }
       }
-    }
+    
+     }
   }
 </script>
 
@@ -101,7 +113,7 @@ import gsap from 'gsap'
 
 #burger {
   position: absolute;
-  top: $--spacer--S;
+  top: 20px;
   left: $--spacer--S;
   display: flex;
   flex-flow: row nowrap;

@@ -1,7 +1,8 @@
 <template>
   <div class="coreApp">
-
-    <Navigation class="navcore" />    
+    <div class="navcore">
+      <Navigation  />    
+    </div>
 
     <SideBarMenu class="SideBarMenu">
       <Menu class="menu" />
@@ -21,7 +22,6 @@
 </template>
 
 <script>
-import { store } from '@/store'
 import sanity from '@/sanity'
 import gsap from 'gsap'
 
@@ -55,7 +55,8 @@ const query = `*[_type == 'projects']{
         return Math.floor(this.windowWidth * 0.70)
       },
       isMenuOpen() {
-        return store.isNavOpen
+        console.log('isMenuOpen', this)
+        return this.$store.state.isNavOpen
       }
     },
     methods: {
@@ -104,11 +105,12 @@ const query = `*[_type == 'projects']{
   display: none;
   }
 
-.navcore {
+.navcore {  
   position: fixed; 
   top: 40px;
   left: 40px;
   z-index: 9000;
+  background: black !important;
   
   @media only screen 
     and (min-device-width: 375px) 
