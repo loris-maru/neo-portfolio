@@ -33,7 +33,6 @@ import DetailTable from '@/components/projects/DetailTable.vue'
 import DualOne from '@/components/projects/TwoColumns_IMGS.vue'
 import TwoColumns_IMGText from '@/components/projects/TwoColumns_IMG-Text.vue'
 import TwoColumns_TextIMG from '@/components/projects/TwoColumns_Text-IMG.vue'
-import FeatureDetail from '@/components/projects/FeatureDetail.vue'
 import Text from '@/components/projects/TextLevelOne.vue'
 import BackButton from '@/components/BackButton.vue'
 
@@ -45,7 +44,6 @@ const COMPONENT_MAP = {
   // Second one is the component in Vue
   'header': Header,
   'imgFullPage': ImageFull,
-  'feature': FeatureDetail,
   'largeText': Text,
   'imgText': TwoColumns_IMGText,
   'textImg': TwoColumns_TextIMG,
