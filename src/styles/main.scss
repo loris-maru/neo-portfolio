@@ -7,7 +7,16 @@
 /*–––– TYPOGRAPHY ––––*/
 @font-face {
   font-family: 'McQueen';
-  src: url('~@/assets/fonts/McQueenTextGX.ttf');
+  src:  url('~@/assets/fonts/McQueenGrotesk-Medium.woff') format('woff'),
+        url('~@/assets/fonts/McQueenGrotesk-Medium.woff2') format('woff2');
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: 'McQueen';
+  src:  url('~@/assets/fonts/McQueenGrotesk-Regular.woff') format('woff'),
+        url('~@/assets/fonts/McQueenGrotesk-Regular.woff2') format('woff2');
+  font-weight: 400;
 }
 
 @font-face {

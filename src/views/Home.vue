@@ -221,23 +221,18 @@ const query = `*[_type == 'projects']{
       // ----------------
       redirectToProject(url) {
         let headTimeline = gsap.timeline()
-        
         this.$refs.infoBar.animateInfoBar({
           opacity: '0',
           top: '-150px'
         })
-
         this.$refs.buttonView.animateButton({
           opacity: '0'
         })
-
         this.$refs.projCounter.animateCounter({
           opacity: '0',
-          top: '-150px'
+          bottom: '-150px'
         })
-
         headTimeline.to(this.$refs.mainTitle, 0.3, {opacity: '0', onComplete: () => {
-
           this.$refs.projIMG.animateCurrentImage({
             borderRadius: '0%',
             height: '100vh',

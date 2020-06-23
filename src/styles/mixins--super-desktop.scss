@@ -26,9 +26,23 @@
 
 
 /*----- TITLE MAIN -----*/
-@mixin title--super-desktop--4($color, $weight) {
+@mixin title--super-desktop--1($color) {
   font-family: 'McQueen';
-  font-variation-settings: 'wght' $weight;
+  font-weight: 700;
+  font-size: 2vw;
+  color: $color;
+}
+
+@mixin title--super-desktop--2($color) {
+  font-family: 'McQueen';
+  font-weight: 400;
+  font-size: 0.9vw;
+  color: $color;
+}
+
+@mixin title--super-desktop--4($color) {
+  font-family: 'McQueen';
+  font-weight: 700;
   font-size: 0.7vw;
   color: $color;
   text-transform: uppercase;

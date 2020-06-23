@@ -42,8 +42,8 @@ import gsap from 'gsap'
 <style lang="scss" scoped>
 
 .buttonCore {
-  width: 40vh;
-  height: 40vh;
+  width: 25vw;
+  height: 25vw;
   display: flex;
   background: rgba(42, 102, 131, 0.15);
   flex-flow: column nowrap;
@@ -79,7 +79,7 @@ button {
   top: -8px;
   font: { 
     family: 'Oni';
-    size: 72px;
+    size: 3.6vw;
     variation-settings: 'wght' $--weight--medium;
   }
   color: $--color--01;

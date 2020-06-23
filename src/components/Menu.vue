@@ -6,7 +6,7 @@
         :projectNumber="projectNumber + 1"
         :projectCategory="proj.fieldName"
         :projectName="proj.name"
-        :projectSlug="proj.slug.current"
+        :projectSlug="proj.projectSlug"
         class="itemProjectMenu"
         />
     </div>
@@ -24,7 +24,8 @@ import sanity from '@/sanity'
 const query = `*[_type == 'projects']{
   name,
   'fieldName': field->name,
-  slug
+  slug, 
+  'projectSlug': slug.current
   }`
 
   export default {

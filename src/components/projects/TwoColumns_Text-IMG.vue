@@ -107,7 +107,7 @@ const imageBuilder = imageUrlBuilder(sanity)
 
   h1 {
     @include title--desktop--h2;
-    margin-bottom: 14px;
+    margin-bottom: 18px;
 
     @media only screen 
     and (min-device-width: 375px) 
@@ -119,14 +119,14 @@ const imageBuilder = imageUrlBuilder(sanity)
   }
 
   h2 {
-    @include title--desktop--3($--color--02, $--weight--light);
+    @include title--desktop--3($--color--02);
     margin-bottom: 14px;
 
     @media only screen 
     and (min-device-width: 375px) 
     and (max-device-width: 667px) 
     and (-webkit-min-device-pixel-ratio: 2) { 
-      @include title--mobile--3($--color--02, $--weight--light);
+      @include title--mobile--3($--color--02);
     }
   }
 

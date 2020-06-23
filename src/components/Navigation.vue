@@ -1,5 +1,5 @@
 <template>
-    <div v-if="showBurger" id="burger"
+    <div id="burger"
           :class="{'active': isBurgerActive}">
 
           <div class="burgerButton" @click.prevent="toggle">
@@ -18,10 +18,10 @@
 
           <!--</button>-->
           </div>
-          <div class="divider mobileVisibility" :class="{'appear': !isBurgerActive, 'index': isBurgerActive}"></div>
+          <div v-if="showBurger" class="divider mobileVisibility" :class="{'appear': !isBurgerActive, 'index': isBurgerActive}"></div>
 
           <router-link to="/informations">
-              <span :class="{'appear': !isBurgerActive}" class="menuIndex information">Infos</span>
+              <span v-if="showBurger" :class="{'appear': !isBurgerActive}" class="menuIndex information">Infos</span>
           </router-link>
     </div>
 </template>
@@ -138,6 +138,11 @@ import gsap from 'gsap'
   top: 1px;
   @include desktop--subtitle--1($--color--02);
   opacity: 0;
+
+  @media only screen
+    and (min-device-width: 1900px) {
+      @include title--super-desktop--2($--color--02);
+    }
 }
 
 .burgerButton {
@@ -158,10 +163,19 @@ a {
 }
 
 .divider {
+  position: relative;
   background: $--color--02;
   width: 1px;
   height: 24px;
   margin: 0 26px;
+
+  @media only screen
+    and (min-device-width: 1900px) {
+      background: rgba(42, 102, 131, 0.3);
+      top: 2px;
+      height: 26px;
+      margin: 0 30px;
+    }
 }
 
 /*------ ICON MENU ------*/
@@ -174,7 +188,7 @@ a {
   height: 24px;
   position: relative;
   cursor: pointer;
-  margin-right: 24px;
+  margin-right: 32px;
 
   @media only screen 
     and (min-device-width: 375px) 
@@ -182,6 +196,12 @@ a {
     and (orientation: portrait) { 
       margin-right: 12px;
   }
+
+  @media only screen
+    and (min-device-width: 1900px) {
+      top: 2px;
+      margin-right: 40px;
+    }
 
   .dotOne {
     top: 0;

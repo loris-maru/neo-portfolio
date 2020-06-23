@@ -17,7 +17,7 @@ Vue.use(VueWindowSize)
 Vue.use(VueLazyload, {
   observer: true,
   observerOptions: {
-    rootMargin: '0px',
+    rootMargin: '200px',
     threshold: 0.1
   },
   lazyComponent: true

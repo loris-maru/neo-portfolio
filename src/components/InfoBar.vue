@@ -82,13 +82,18 @@ section {
     and (orientation: portrait) { 
       flex-basis: 100%;
       margin: 0;
+    }
   }
-  }
+
+  @media only screen
+    and (min-device-width: 1900px) {
+      flex-basis: 30%;
+    }
 }
 
 h1 {
   @include desktop--title--1($--color--01);
-  margin-top: 12px;
+  margin-top: 6px;
 
   @media only screen 
     and (min-device-width: 375px) 
@@ -97,10 +102,20 @@ h1 {
       position: relative;
       top: -6px;
   }
+
+  @media only screen
+    and (min-device-width: 1900px) {
+      @include title--super-desktop--1($--color--01);
+    }
 }
 
 h2 {
   @include desktop--subtitle--1($--color--01);
+
+  @media only screen
+    and (min-device-width: 1900px) {
+      @include title--super-desktop--2($--color--01);
+    }
 }
 
 .mobileVisibility {

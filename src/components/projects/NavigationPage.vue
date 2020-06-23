@@ -32,13 +32,13 @@
 }
 
 .navItem {
-  @include title--desktop--4($--color--02, $--weight--regular);
+  @include title--desktop--4($--color--02);
   display: flex;
   flex-flow: row nowrap;
 
   /* SUPER DESKTOP */
   @media screen and (min-device-width: $--breakpoint--super-desktop) {
-    @include title--super-desktop--4($--color--02, $--weight--regular);
+    @include title--super-desktop--4($--color--02);
   }
 
   /* MOBILE */

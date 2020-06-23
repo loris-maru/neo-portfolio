@@ -1,19 +1,21 @@
 <template>
   <div class="coreApp">
     <div class="navcore">
-      <Navigation  />    
+      <Navigation />    
     </div>
 
-    <SideBarMenu class="SideBarMenu">
-      <Menu class="menu" />
+    <SideBarMenu class="SideBarMenu" ref="sideBarContainer">
+      <Menu class="menu" ref="menuSliding" />
     </SideBarMenu>
 
       <div class="filterBlock" ref="containerFilter" :class="{'appear': isMenuOpen}">
       </div>
 
-    <div class="centerContent">
-      <router-view />
-    </div>
+    
+      <div class="centerContent">
+          <router-view />
+      </div>
+    
 
     <div ref="blueContainer" class="blueContainer"></div>
     <div ref="creamContainer" class="creamContainer"></div>
@@ -69,24 +71,11 @@ const query = `*[_type == 'projects']{
           console.log('The error is: ', error)
         }
       },
-      fadeInMenu() {
-        //let tl = gsap.timeline()
-        if (this.isNavOpen == true) {
-          gsap.to('.filterBlock', {
-            duration: 0.4, 
-            opacity: 0.7,
-            ease: 'bounce.out'
-          })
-          //tl.to(this.$refs.containerFilter, 0.4, {opacity: '0.7'})
-        } else if (this.isNavOpen == false) {
-          //tl.to(this.$refs.containerFilter, 0.4, {opacity: '0'})
-        }
-      }
-    },
     created() {
       this.fetchProject()
     }
   }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -97,10 +86,11 @@ const query = `*[_type == 'projects']{
   z-index: 100;
   top: 0;
   left: 0;
+
+  transition: all ease-out 0.7s;
 }
 
 /*----------*/
-
 .menu::-webkit-scrollbar {
   display: none;
   }
@@ -177,15 +167,31 @@ li {
 }
 
 /* ANIMATION*/
+  .fadingIn-enter,
+  .fadingIn-leave-to {
+    opacity: 1;
+    transition: transform 0.4s ease;
+  }
+
 .fadingIn-enter-active,
 .fadingIn-leave-active {
-  transition: transform 0.5s ease;
+  transition: transform 0.4s ease;
 }
 
-.fadingIn-enter,
-.fadingIn-leave-to {
-  opacity: 1;
-  transition: transform 0.5s ease;
+
+.slither-enter-active, .slither-leave-active {
+  transition: transform 1s;
 }
+
+.slither-enter, .slither-leave-to {
+  transform: translatey(-40px);
+  opacity: 0.6;
+}
+
+.slither-enter-to, .slither-leave {
+  transform: translateX(0);
+}
+
+
 
 </style>

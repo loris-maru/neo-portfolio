@@ -4,7 +4,7 @@
     </div>
 
     <transition name="slide">
-      <div v-if="isPanelOpen" class="sidebar-panel">
+      <div v-if="isPanelOpen" class="sidebar-panel" :class="{'roundingElements': !isPanelOpen}">
         <slot></slot>
       </div>
     </transition>
@@ -13,7 +13,7 @@
 </template>
 
 <script>
-
+import gsap from 'gsap'
   export default {
     methods: {
         closeSidebarPanel() {
@@ -30,18 +30,18 @@
 
 <style lang="scss" scoped>
 
+
 /* ANIMATION*/
 .slide-enter-active,
 .slide-leave-active {
-  transition: transform 1.4s ease;
+  transition: transform 1.6s ease;
 }
 
 .slide-enter,
 .slide-leave-to {
   transform: translateX(-200%);
-  transition: all 0.8s ease-in 0s;
+  transition: all 1.3s ease-in 0s;
 }
-
 
 .sidebar-backdrop {
   background: transparent;
@@ -56,6 +56,7 @@
 .sidebar-panel {
   width: 82vw;
   height: 100vh;
+  border-radius: 0;
 
   overflow-x: hidden;
   background-color: #fff;
@@ -80,8 +81,11 @@
     and (orientation: portrait) { 
       padding-left: 12px;
     }
-
 }
 
+.roundingElements {
+  border-radius: 50%;
+  transition: all ease 3s;
+}
 
 </style>

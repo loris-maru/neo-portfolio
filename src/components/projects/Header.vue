@@ -138,13 +138,13 @@ h2 {
 }
 
 h3 {
-  @include title--desktop--4($--color--02, $--weight--light);
+  @include title--desktop--4($--color--02);
 
   @media only screen 
   and (min-device-width: 375px) 
   and (max-device-width: 667px) 
   and (-webkit-min-device-pixel-ratio: 2) { 
-    @include title--mobile--3($--color--02, $--weight--light);
+    @include title--mobile--3($--color--02);
     line-height: 1.2;
     }
 }

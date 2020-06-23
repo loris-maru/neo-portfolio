@@ -2,8 +2,8 @@
 @mixin desktop--title--1($--color) {
   font: {
     family: 'McQueen';
-    size: 30px; 
-    variation-settings: 'wght' $--weight--medium;
+    size: 32px; 
+    weight: 700;
   }
   color: $--color;
 }
@@ -12,7 +12,7 @@
   font: {
     family: 'McQueen';
     size: 16px; 
-    variation-settings: 'wght' $--weight--regular;
+    weight: 400;
   }
   color: $--color;
   text-transform: uppercase;
@@ -28,9 +28,9 @@
 }
 
 /*-------- TITLE N°2 --------*/
-@mixin title--desktop--2($color, $weight) {
+@mixin title--desktop--2($color) {
   font-family: 'McQueen';
-  font-variation-settings: 'wght' $weight;
+  font-weight: 700;
   font-size: 1.4vw;
   color: $color;
   text-transform: uppercase;
@@ -39,20 +39,20 @@
 }
 
 /*-------- TITLE N°3 --------*/
-@mixin title--desktop--3($color, $weight) {
+@mixin title--desktop--3($color) {
   font-family: 'McQueen';
-  font-variation-settings: 'wght' $weight;
-  font-size: 0.9vw;
+  font-weight: 700;
+  font-size: 1.4vw;
   color: $color;
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }
 
 /*-------- TITLE N°4 --------*/
-@mixin title--desktop--4($color, $weight) {
+@mixin title--desktop--4($color) {
   font-family: 'McQueen';
-  font-variation-settings: 'wght' $weight;
-  font-size: 0.85vw;
+  font-weight: 700;
+  font-size: 18px;
   color: $color;
   text-transform: uppercase;
   letter-spacing: 0.15em;

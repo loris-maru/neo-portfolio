@@ -60,10 +60,10 @@ h1 {
 }
 
 h2 {
-  @include title--desktop--4($--color--02, $--weight--regular);
+  @include title--desktop--4($--color--02);
 
   @media screen and (min-device-width: $--breakpoint--super-desktop){
-    @include title--super-desktop--4($--color--02, $--weight--light);
+    @include title--super-desktop--4($--color--02);
   }
 }
 

@@ -16,7 +16,11 @@
       <div class="additionalInfo">
         <div v-for="(lastProj, projeIndex) in footer.featuredProject" :key="projeIndex" class="itemsTable">
           <h3>{{lastProj.footerItemSubtitle}}</h3>
-          <h2>{{lastProj.itemTitle}}</h2>
+          <h2>
+            <router-link :to="`/project/${lastProj.urlAddress}`">
+              {{lastProj.itemTitle}}
+            </router-link>
+          </h2>
         </div>
       </div>
 
@@ -31,7 +35,11 @@
       <div class="additionalInfo">
         <div v-for="(aboutInfo, aboutItemNum) in footer.aboutInfos" :key="aboutItemNum" class="itemsTable">
           <h3>{{aboutInfo.footerItemSubtitle}}</h3>
-          <h2>{{aboutInfo.itemTitle}}</h2>
+          <h2>
+            <a :href="`${aboutInfo.urlAddress}`">
+              {{aboutInfo.itemTitle}}
+            </a>
+          </h2>
         </div>
       </div>
     </section>
@@ -51,7 +59,7 @@ const query = `*[_type == 'footer'][0]{
   aboutInfos,
   itemTitle,
   footerItemSubtitle,
-  'projName': featuredProject[].footerItemSubtitle
+  'projectURL': featuredProject[].urlAddress
   }`
 
   export default {
@@ -217,7 +225,7 @@ section {
 h1 {
   display: flex;
   align-items: center;
-  @include title--desktop--3($--color--03, $--weight--medium);
+  @include title--desktop--3($--color--03);
 
   img {
     margin-right: 30px;
@@ -227,13 +235,18 @@ h1 {
     and (min-device-width: 375px) 
     and (max-device-width: 667px) 
     and (-webkit-min-device-pixel-ratio: 2) { 
-      @include title--mobile--3($--color--03, $--weight--medium);
+      @include title--mobile--3($--color--03);
       margin-bottom: 30px;
     }
 }
 
 h2 {
   @include title--desktop--1($--color--03, $--weight--light);
+
+  a {
+    text-decoration: none;
+    color: $--color--03;
+  }
   
   @media only screen 
     and (min-device-width: 375px) 
@@ -245,32 +258,37 @@ h2 {
 }
 
 h3 {
-  @include title--desktop--3($--color--03, $--weight--light);
+  @include title--desktop--4($--color--03);
   margin-bottom: 10px;
-  letter-spacing: 0.25em;
+  letter-spacing: 0.15em;
   opacity: 0.7;
 
   @media only screen 
     and (min-device-width: 375px) 
     and (max-device-width: 667px) 
     and (-webkit-min-device-pixel-ratio: 2) { 
-      @include title--mobile--3($--color--03, $--weight--medium);
+      @include title--mobile--3($--color--03);
     }
 }
 
 section:last-child {
   h1 {
-    @include title--desktop--3($--color--01, $--weight--medium);
+    @include title--desktop--3($--color--01);
 
     @media only screen 
     and (min-device-width: 375px) 
     and (max-device-width: 667px) 
     and (-webkit-min-device-pixel-ratio: 2) { 
-      @include title--mobile--3($--color--01, $--weight--medium);
+      @include title--mobile--3($--color--01);
     }
   }
   h2 {
     @include title--desktop--1($--color--01, $--weight--light);
+
+    a {
+      text-decoration: none;
+      color: $--color--01;
+    }
 
     @media only screen 
     and (min-device-width: 375px) 
@@ -282,13 +300,13 @@ section:last-child {
   }
 
   h3 {
-    @include title--desktop--3($--color--01, $--weight--light);
+    @include title--desktop--4($--color--01);
 
     @media only screen 
     and (min-device-width: 375px) 
     and (max-device-width: 667px) 
     and (-webkit-min-device-pixel-ratio: 2) { 
-      @include title--mobile--3($--color--01, $--weight--medium);
+      @include title--mobile--3($--color--01);
     }
   }
 }

@@ -29,7 +29,7 @@
         default: 'My Project'
       },
       projectSlug: {
-        type: String,
+        type: [Number, String],
         required: true
       }
     }
@@ -42,7 +42,7 @@
   font: {
     family: 'McQueen';
     size: 16px;
-    variation-settings: 'wght' $--weight--bold;
+    weight: 400;
   }
   color: $--color--02;
   margin-right: 10px;
@@ -55,6 +55,11 @@ section {
   flex-flow: row nowrap;
 }
 
+a {
+  color: $--color--02;
+  text-decoration: none;
+}
+
 h1 {
   font: {
     family: 'Oni';
@@ -63,6 +68,13 @@ h1 {
   }
   color: $--color--02;
   margin-top: 12px;
+  transition: all ease 0.6s;
+  transform-origin: top left;
+
+  &:hover {
+    transform: scale(1.15);
+    font-variation-settings: 'wght' 800;
+  }
 }
 
 h2 {

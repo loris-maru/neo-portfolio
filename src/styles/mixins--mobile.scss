@@ -38,9 +38,9 @@
   line-height: 1.3;
 }
 
-@mixin title--mobile--3($color, $weight) {
+@mixin title--mobile--3($color) {
   font-family: 'McQueen';
-  font-variation-settings: 'wght' $weight;
+  font-weight: 700;
   font-size: 3.4vw;
   color: $color;
   text-transform: uppercase;
