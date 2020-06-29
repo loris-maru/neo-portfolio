@@ -36,14 +36,14 @@
 @mixin title--super-desktop--2($color) {
   font-family: 'McQueen';
   font-weight: 400;
-  font-size: 0.9vw;
+  font-size: 24px;
   color: $color;
 }
 
 @mixin title--super-desktop--4($color) {
   font-family: 'McQueen';
   font-weight: 700;
-  font-size: 0.7vw;
+  font-size: 22px;
   color: $color;
   text-transform: uppercase;
   letter-spacing: 0.15em;

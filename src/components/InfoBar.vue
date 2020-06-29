@@ -52,10 +52,10 @@ import gsap from 'gsap'
 <style lang="scss" scoped>
 
 .infoBarCore {
-  width: 42vw;
+  width: 50vw;
   display: flex;
   flex-flow: row nowrap;
-  align-items: space-around;
+  justify-content: space-around;
 
   @media only screen 
     and (min-device-width: 375px) 
@@ -66,16 +66,13 @@ import gsap from 'gsap'
 }
 
 section {
-  flex-basis: 24%;
+  
   margin-right: 80px;
   display: flex;
   flex-flow: column nowrap;
 
-  &:nth-child(2) {
-    flex-basis: 20%;
-  }
-
   &:first-child {
+    flex-basis: 50%;
     @media only screen 
     and (min-device-width: 375px) 
     and (max-device-width: 736px) 
@@ -83,6 +80,14 @@ section {
       flex-basis: 100%;
       margin: 0;
     }
+  }
+
+  &:nth-child(2) {
+    flex-basis: 30%;
+  }
+
+  &:last-child {
+    flex-basis: 20%;
   }
 
   @media only screen
