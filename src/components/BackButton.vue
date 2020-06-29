@@ -23,6 +23,11 @@
 
 .labelButton {
   @include desktop--subtitle--1($--color--02);
+
+  @media only screen
+    and (min-device-width: 1900px) {
+      @include title--super-desktop--2($--color--02);
+    }
 }
 
 

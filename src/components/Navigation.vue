@@ -112,11 +112,12 @@ import gsap from 'gsap'
 <style lang="scss" scoped>
 
 #burger {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   position: absolute;
   top: 20px;
   left: $--spacer--S;
-  display: flex;
-  flex-flow: row nowrap;
   cursor: pointer;
 
   img {
@@ -134,8 +135,6 @@ import gsap from 'gsap'
 }
 
 .menuIndex {
-  position: relative;
-  top: 1px;
   @include desktop--subtitle--1($--color--02);
   opacity: 0;
 
@@ -148,10 +147,9 @@ import gsap from 'gsap'
 .burgerButton {
   display: flex;
   flex-flow: row nowrap;
+  align-items: center;
   border: none;
   background: transparent;
-  margin: none;
-  padding: none;
 }
 
 .disappear {
@@ -180,7 +178,7 @@ a {
 
 /*------ ICON MENU ------*/
 .iconToggle {
-  position: relative;
+  position: absolute;
   top: -2px;
   display: flex;
   flex-flow: row wrap;
@@ -251,7 +249,7 @@ a {
 }
 
 .appear {
-  display: visible;
+  display: block;
   opacity: 1;
   transition: all ease 0.8s;
 }
