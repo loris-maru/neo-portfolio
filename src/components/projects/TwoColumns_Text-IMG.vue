@@ -13,7 +13,8 @@
     <!-- I M A G E -->
     <div class="imageContent">
       <lazy-component>
-        <img :src="imageUrlFor(image).auto('format').quality(70).fit('max')">
+        <img  class="image"
+              :class="imageOpacityClass" @load="onImageLoad"  :src="imageUrlFor(image).auto('format').quality(70).fit('max')">
       </lazy-component>
     </div>
 
@@ -26,6 +27,11 @@ import imageUrlBuilder from '@sanity/image-url'
 const imageBuilder = imageUrlBuilder(sanity)
 
   export default {
+    data() {
+      return {
+        imageOpacityClass: 'opacity-0'
+      }
+    },
     props: {
       project: {
         type: Object,
@@ -53,6 +59,9 @@ const imageBuilder = imageUrlBuilder(sanity)
           const res = imageBuilder.image(source)
           console.log('image url for res', res)
           return res
+        },
+        onImageLoad(_) {
+          this.imageOpacityClass = 'opacity-full'
         }
       }
 
@@ -140,5 +149,18 @@ const imageBuilder = imageUrlBuilder(sanity)
       @include text--mobile--small;
     }
   }
+
+/*-------- Image fade-in --------*/
+.image {
+  transition: all 0.5s;
+}
+
+.opacity-0 {
+  opacity: 0;
+}
+
+.opacity-full {
+  opacity: 100%;
+}
 
 </style>

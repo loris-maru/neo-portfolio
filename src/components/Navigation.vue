@@ -197,7 +197,9 @@ a {
 
   @media only screen
     and (min-device-width: 1900px) {
-      top: 2px;
+      width: 26px;
+      height: 26px;
+      top: -1px;
       margin-right: 40px;
     }
 

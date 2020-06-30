@@ -30,17 +30,18 @@ import gsap from 'gsap'
 
 <style lang="scss" scoped>
 
-
 /* ANIMATION*/
 .slide-enter-active,
 .slide-leave-active {
-  transition: transform 1.6s ease;
+  transition: transform 0.7s ease, border-radius;
+  border-radius: 0px;
 }
 
 .slide-enter,
 .slide-leave-to {
   transform: translateX(-200%);
-  transition: all 1.3s ease-in 0s;
+  transition: all 0.6s ease-in;
+  border-radius: 50%;
 }
 
 .sidebar-backdrop {
@@ -54,10 +55,8 @@ import gsap from 'gsap'
 }
 
 .sidebar-panel {
-  width: 82vw;
+  width: 62vw;
   height: 100vh;
-  border-radius: 0;
-
   overflow-x: hidden;
   background-color: #fff;
   position: fixed;
@@ -65,6 +64,8 @@ import gsap from 'gsap'
   top: 0;
   z-index: 999;
   padding-left: 80px;
+  // Change the speed of the transition
+  transition: all 1.8s;
 
   &::-webkit-scrollbar {
     display: none;

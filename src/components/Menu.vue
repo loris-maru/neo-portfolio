@@ -58,7 +58,7 @@ const query = `*[_type == 'projects']{
 <style lang="scss" scoped>
 
 .menuCore {
-  width: 70vw;
+  width: 60vw;
   background: transparent;
   display: flex;
   flex-flow: row wrap;

@@ -3,14 +3,14 @@
     <!-- IMAGE 1 -->
     <div class="imageContent">
       <lazy-component>
-        <img :src="imageUrlFor(firstImage).auto('format').quality(70).fit('max')">
+        <img class="image" :class="imageOpacityClass" @load="onImageLoad" :src="imageUrlFor(firstImage).auto('format').quality(70).fit('max')">
       </lazy-component>
     </div>
 
     <!-- IMAGE 2 -->
     <div class="imageContent">
       <lazy-component>
-        <img :src="imageUrlFor(secondImage).auto('format').quality(70).fit('max')">
+        <img class="image" :class="imageOpacityClass" @load="onImageLoad" :src="imageUrlFor(secondImage).auto('format').quality(70).fit('max')">
       </lazy-component>
     </div>
 
@@ -22,6 +22,11 @@ import sanity from '@/sanity'
 import imageUrlBuilder from '@sanity/image-url'
 const imageBuilder = imageUrlBuilder(sanity)
   export default {
+    data() {
+      return {
+        imageOpacityClass: 'opacity-0'
+      }
+    },
     props: {
       project: {
         type: Object,
@@ -41,6 +46,9 @@ const imageBuilder = imageUrlBuilder(sanity)
         const res = imageBuilder.image(source)
         console.log('image url for res', res)
         return res
+      },
+      onImageLoad(_) {
+        this.imageOpacityClass = 'opacity-full'
       }
     }
   }
@@ -76,6 +84,21 @@ const imageBuilder = imageUrlBuilder(sanity)
   and (-webkit-min-device-pixel-ratio: 2) { 
     width: 100%;
     }
+}
+
+
+/*-------- Image Fading In --------*/
+
+.image {
+  transition: all 0.5s;
+}
+
+.opacity-0 {
+  opacity: 0;
+}
+
+.opacity-full {
+  opacity: 100%;
 }
 
 

@@ -1,7 +1,9 @@
 <template>
   <div class="imgContainer">
     <lazy-component>
-    <img :src="imageUrlFor(image).auto('format').quality(70).fit('max')" alt="Image of the project" />
+    <img  class="image"
+          :class="imageOpacityClass" @load="onImageLoad"  
+          :src="imageUrlFor(image).auto('format').quality(70).fit('max')" alt="Image of the project" />
     </lazy-component>
   </div>
 </template>
@@ -27,12 +29,28 @@ const imageBuilder = imageUrlBuilder(sanity)
         const res = imageBuilder.image(source)
         console.log('image url for res', res)
         return res
+      },
+      onImageLoad(_) {
+        this.imageOpacityClass = 'opacity-full'
       }
     }
   }
 </script>
 
 <style lang="scss" scoped>
+
+.image {
+  transition: all 0.5s;
+}
+
+.opacity-0 {
+  opacity: 0;
+}
+
+.opacity-full {
+  opacity: 100%;
+}
+
 
 .imgContainer {
   padding: $--spacer--M 0 $--spacer--L 60px;

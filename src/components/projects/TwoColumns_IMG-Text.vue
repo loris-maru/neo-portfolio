@@ -2,7 +2,7 @@
   <div class="CentralSpine">
     <div class="imageContent">
       <lazy-component>
-        <img :src="imageUrlFor(image).auto('format').quality(70).fit('max')">
+        <img class="image" :class="imageOpacityClass" @load="onImageLoad" :src="imageUrlFor(image).auto('format').quality(70).fit('max')">
       </lazy-component>
     </div>
 
@@ -45,17 +45,37 @@ const imageBuilder = imageUrlBuilder(sanity)
         default: 'This is the content'
       }
     },
+    data() {
+      return {
+        imageOpacityClass: 'opacity-0'
+      }
+    },
     methods: {
       imageUrlFor(source) {
         const res = imageBuilder.image(source)
         console.log('image url for res', res)
         return res
+      },
+      onImageLoad(_) {
+        this.imageOpacityClass = 'opacity-full'
       }
     }
   }
 </script>
 
 <style lang="scss" scoped>
+
+.image {
+  transition: all 0.5s;
+}
+
+.opacity-0 {
+  opacity: 0;
+}
+
+.opacity-full {
+  opacity: 100%;
+}
 
 .CentralSpine {
   padding: $--spacer-MEGA 10vw;
