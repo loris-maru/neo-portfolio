@@ -48,16 +48,17 @@ import gsap from 'gsap'
         const {heroImageNew, heroImageCurrent} = this.$refs
         heroImageNew.onload = () => {
           setTimeout(() => {
-            const speed = 0.7
+            const speedCurrent = 0.8
+            const speedNext = 0.3
             let timeline = gsap.timeline()         
-            timeline.to(heroImageCurrent, speed, {opacity: 0})
-            timeline.to(heroImageNew, speed, {opacity: 1, onComplete: () => {
+            timeline.to(heroImageCurrent, speedCurrent, {opacity: 0})
+            timeline.to(heroImageNew, speedNext, {opacity: 1, onComplete: () => {
                 this.currentImg = this.newImg
                 heroImageCurrent.style.opacity = 1
                 heroImageNew.style.opacity = 0
               }
-            }, '-=0.5')// originall -0.15
-          }, 10)
+            }, '-=0.15')// originall -0.15
+          }, 2)
         }
       },
       attachImage(src, oldSrc) {
@@ -81,18 +82,11 @@ import gsap from 'gsap'
         this.newImg = src
 
 },
-      setImageRadius(value, speed = 1) {
-        const {imageHero} = this.$refs
-        let timeline = gsap.timeline()
-        timeline.to(imageHero, speed, {
-          'border-radius': value
-        })
-      },
-      animateImage(image, value, speed = 1.5) {
+      animateImage(image, value, speed = 0.9) {
         let timeline = gsap.timeline()
         timeline.to(image, speed, value)
       },
-      animateCurrentImage(value, speed = 1) {
+      animateCurrentImage(value, speed = 1.3) {
         const {heroImageCurrent} = this.$refs   
         let timeline = gsap.timeline()   
         timeline.to(heroImageCurrent, speed, value)
@@ -131,7 +125,7 @@ import gsap from 'gsap'
     height: 90vh;
     border-radius: 50%;
     &.new {
-      opacity: 0;
+      opacity: 1;
     }
 
     @media only screen 

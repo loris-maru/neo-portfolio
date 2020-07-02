@@ -33,15 +33,15 @@ import gsap from 'gsap'
 /* ANIMATION*/
 .slide-enter-active,
 .slide-leave-active {
-  transition: transform 0.7s ease, border-radius;
+  transition: transform 1.6s ease, border-radius;
   border-radius: 0px;
 }
 
 .slide-enter,
 .slide-leave-to {
   transform: translateX(-200%);
-  transition: all 0.6s ease-in;
-  border-radius: 50%;
+  transition: all 1.2s ease-in;
+  border-radius: 0 50vh 50vh 0;
 }
 
 .sidebar-backdrop {

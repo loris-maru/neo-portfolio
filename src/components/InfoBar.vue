@@ -72,7 +72,7 @@ section {
   flex-flow: column nowrap;
 
   &:first-child {
-    flex-basis: 50%;
+    flex-basis: 40%;
     @media only screen 
     and (min-device-width: 375px) 
     and (max-device-width: 736px) 
@@ -83,7 +83,7 @@ section {
   }
 
   &:nth-child(2) {
-    flex-basis: 30%;
+    flex-basis: 20%;
   }
 
   &:last-child {

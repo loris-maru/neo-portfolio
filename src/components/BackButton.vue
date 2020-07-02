@@ -1,8 +1,8 @@
 <template>
   <div class="backButtonCore">
-    <router-link to="/">
-      <img src="../assets/images/icn_back.svg" width="6" height="10" alt="Chevron back button" />
-      <span class="labelButton">Back</span>
+    <router-link to="/informations">
+      <!--<img src="../assets/images/icn_back.svg" width="6" height="10" alt="Chevron back button" />-->
+      <span class="labelButton">Infos</span>
     </router-link>
 
   </div>

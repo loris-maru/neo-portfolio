@@ -70,11 +70,11 @@ const query = `*[_type == 'projects']{
         } catch(error) {
           console.log('The error is: ', error)
         }
-      },
-    created() {
+      }
+  },
+  created() {
       this.fetchProject()
     }
-  }
 }
 </script>
 

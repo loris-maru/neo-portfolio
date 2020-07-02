@@ -1,7 +1,9 @@
 <template>
   <div class="menuCore">
 
-    <div class="projectItems" v-for="(proj, projectNumber) in projects" :key="projectNumber">
+    <div  class="projectItems"
+          v-for="(proj, projectNumber) in projects"
+          :key="projectNumber">
       <MenuItem
         :projectNumber="projectNumber + 1"
         :projectCategory="proj.fieldName"
@@ -37,6 +39,11 @@ const query = `*[_type == 'projects']{
     components: {
       MenuItem
     },
+    computed: {
+      isMenuActive() {
+        return this.$router.state.isNavOpen
+      }
+    },
     methods: {
       async fetchProjects() {
         console.log('Fetching in the menu')
@@ -57,6 +64,8 @@ const query = `*[_type == 'projects']{
 
 <style lang="scss" scoped>
 
+
+
 .menuCore {
   width: 60vw;
   background: transparent;
@@ -64,6 +73,7 @@ const query = `*[_type == 'projects']{
   flex-flow: row wrap;
   align-items: space-between;
   padding: 160px 30px;
+  transition: all 0.5s ease-in-out;
 
   @media only screen 
     and (min-device-width: 375px) 
@@ -78,7 +88,7 @@ const query = `*[_type == 'projects']{
   
   @media screen 
   and (min-device-width: 1920px) {
-    flex-basis: 25%; 
+    flex-basis: 25%;
   }
 
   @media only screen 

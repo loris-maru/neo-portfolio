@@ -2,8 +2,10 @@
   <div class="imgContainer">
     <lazy-component>
     <img  class="image"
-          :class="imageOpacityClass" @load="onImageLoad"  
-          :src="imageUrlFor(image).auto('format').quality(70).fit('max')" alt="Image of the project" />
+          :class="imageOpacityClass"
+          @load="onImageLoad"  
+          :src="imageUrlFor(image).auto('format').quality(70).fit('max')"
+          alt="Image of the project" />
     </lazy-component>
   </div>
 </template>
@@ -14,6 +16,11 @@ import imageUrlBuilder from '@sanity/image-url'
 const imageBuilder = imageUrlBuilder(sanity)
 
   export default {
+    data() {
+      return {
+        imageOpacityClass: 'opacity-0'
+      }
+    },
     props: {
       project: {
         type: Object,
@@ -50,7 +57,6 @@ const imageBuilder = imageUrlBuilder(sanity)
 .opacity-full {
   opacity: 100%;
 }
-
 
 .imgContainer {
   padding: $--spacer--M 0 $--spacer--L 60px;

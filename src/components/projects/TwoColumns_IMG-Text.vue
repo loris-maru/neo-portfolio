@@ -2,7 +2,11 @@
   <div class="CentralSpine">
     <div class="imageContent">
       <lazy-component>
-        <img class="image" :class="imageOpacityClass" @load="onImageLoad" :src="imageUrlFor(image).auto('format').quality(70).fit('max')">
+        <img  class="image"
+              :class="imageOpacityClass"
+              @load="onImageLoad"
+              :src="imageUrlFor(image).auto('format').quality(70).fit('max')"
+              alt="Image of the project" />
       </lazy-component>
     </div>
 

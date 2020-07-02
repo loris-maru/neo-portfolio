@@ -13,16 +13,25 @@
 
 
             <!-- <span v-if="!isBurgerActive" class="menuIndex">Index</span> -->
-            <span class="menuIndex mobileVisibility" :class="{'appear': !isBurgerActive, 'index': isBurgerActive}">Index</span>
+            <span v-if="showIndex" class="menuIndex mobileVisibility" :class="{'appear': !isBurgerActive, 'index': isBurgerActive}">Index</span>
             <span class="menuIndex" :class="{'appear': isBurgerActive, 'close': !isBurgerActive}">Close</span>
-
+      
           <!--</button>-->
           </div>
-          <div v-if="showBurger" class="divider mobileVisibility" :class="{'appear': !isBurgerActive, 'index': isBurgerActive}"></div>
 
-          <router-link to="/informations">
-              <span v-if="showBurger" :class="{'appear': !isBurgerActive}" class="menuIndex information">Infos</span>
-          </router-link>
+          <span v-if="showButtonBack" class="menuIndex imgNav" :class="{'appear': !isBurgerActive, 'index': isBurgerActive}">
+              <router-link to="/"><img src="../assets/images/icn_back.svg" alt="image chevron" />Back</router-link>
+          </span>
+
+          <div v-if="!showButtonBack" class="optionalBlock">
+            <div v-if="showBurger" class="divider mobileVisibility"
+            :class="{'appear': !isBurgerActive, 'index': isBurgerActive}">
+            </div>
+
+            <router-link to="/informations">
+                <span v-if="showBurger" :class="{'appear': !isBurgerActive}" class="menuIndex information">Infos</span>
+            </router-link>
+          </div>
     </div>
 </template>
 
@@ -41,6 +50,16 @@ import gsap from 'gsap'
         const routesToHideOn = ['/informations']
         if (routesToHideOn.includes(this.$route.fullPath)) return false
         return true
+      },
+      showIndex() {
+        const routeHomeOn = ['/']
+        if (routeHomeOn.includes(this.$route.fullPath)) return true
+        return false
+      },
+      showButtonBack() {
+        const routeProject = ['Project']
+        if (routeProject.includes(this.$route.name)) return true
+        return false
       }
     },
     watch: {
@@ -134,6 +153,23 @@ import gsap from 'gsap'
   }
 }
 
+.imgNav {
+  width: 150px;
+  display: flex;
+  flex-flow: row nowrap;
+
+  a {
+    color: $--color--02;
+    font-weight: 700;
+  }
+
+  img {
+    position: relative;
+    width: 9px;
+    top: -1px;
+  }
+}
+
 .menuIndex {
   @include desktop--subtitle--1($--color--02);
   opacity: 0;
@@ -144,12 +180,33 @@ import gsap from 'gsap'
     }
 }
 
+.optionalBlock {
+  display: flex;
+}
+
 .burgerButton {
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
   border: none;
   background: transparent;
+}
+
+/*----- CLASS BINDING -----*/
+
+.index {
+  display: none;
+}
+
+.close {
+  display: none;
+}
+
+
+.appear {
+  display: block;
+  opacity: 1;
+  transition: all ease 0.8s;
 }
 
 .disappear {
@@ -242,19 +299,7 @@ a {
   transition: all ease-in-out 0.4s;
 }
 
-.index {
-  display: none;
-}
 
-.close {
-  display: none;
-}
-
-.appear {
-  display: block;
-  opacity: 1;
-  transition: all ease 0.8s;
-}
 
 /*------ TRANSITION ------*/
 

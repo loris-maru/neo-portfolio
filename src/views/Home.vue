@@ -1,13 +1,16 @@
 <template>
   <div class="homeCenter">
 
+    <ScrollSymbol class="scrollSymbol" />
+
     <InfoBar 
       :projectNumber="this.currentProjectIndex + 1"
       :projectName="currentProject.name"
       :projectField="currentProject.fieldName"
       :projectYear="currentProject.year"
       class="infoBar"
-      ref="infoBar" />
+      ref="infoBar"
+      :class="{'titleOnMenu': isThisMenuOpen}" />
 
     <ButtonProjectView
       :slug="currentProjectSlug"
@@ -25,6 +28,7 @@
       ref="projIMG"
       :imageURL="imageUrlFor(currentProject.heroImage).auto('format').quality(70).fit('max').maxWidth(1200).maxHeight(1200)"
       class="imageHero"
+      :class="{'appearOnMenu': isThisMenuOpen}"
       :imageALT="currentProject.headline"
       />
 
@@ -33,6 +37,7 @@
       :currentProjectNumber="this.currentProjectIndex + 1"
       :totalProject="projects.length"
       ref="projCounter"
+      :class="{'titleOnMenu': isThisMenuOpen}"
       />
 
     <swiper
@@ -40,21 +45,19 @@
       class="swiper"
       :options="swiperOptionh"
       @transitionStart="onStartScrolling"
-      @transitionEnd="onEndScrolling"
-      @slideChange="onChangeWholeScrolling">     
+      @transitionEnd="onEndScrolling">     
 
         <swiper-slide class="slideFull" v-for="(proj, projNum) in projects" :key="projNum">
-          <h1 class="headlineTitle" ref="mainTitle">
+          <h1 ref="mainTitle" :class="{'titleOnMenu': isThisMenuOpen}">
             {{proj.headline}}
           </h1>
         </swiper-slide>
-
     </swiper>
 
-    <div ref="blueBackground" class="blueBackground">
+    <div ref="blueBackground" class="blueBackground" :class="{'backgroundChangeOne': isThisMenuOpen}">
     </div>
 
-    <div ref="creamBackground" class="creamBackground">
+    <div ref="creamBackground" class="creamBackground" :class="{'backgroundChangeTwo': isThisMenuOpen}">
     </div>
 
   </div>
@@ -79,6 +82,7 @@ import imageHero from '@/components/imageHero.vue'
 import InfoBar from '@/components/InfoBar.vue'
 import ProjectCounter from '@/components/ProjectCounter.vue'
 import ButtonProjectView from '@/components/ButtonProjectView.vue'
+import ScrollSymbol from '@/components/ScrollSymbol.vue'
 
 const query = `*[_type == 'projects']{
   name,
@@ -100,10 +104,11 @@ const query = `*[_type == 'projects']{
         swiperOptionh: {
           spaceBetween: 50,
           mousewheel: true,
-          direction: 'horizontal',
+          direction: 'vertical',
           slidesPerView: 1,
-          speed: 1200,
-          sensitivity: 3
+          speed: 1000,
+          sensitivity: 3,
+          keyboard: true
         }
       }
     },
@@ -113,7 +118,8 @@ const query = `*[_type == 'projects']{
       imageHero,
       InfoBar,
       ProjectCounter,
-      ButtonProjectView
+      ButtonProjectView,
+      ScrollSymbol
     },
     computed: {
       currentProject() {
@@ -121,6 +127,9 @@ const query = `*[_type == 'projects']{
       },
       currentProjectSlug() {
         return this.currentProject?.slug?.current || ''
+      },
+      isThisMenuOpen() {
+        return this.$store.state.isNavOpen
       }
     },
     methods: {
@@ -139,82 +148,89 @@ const query = `*[_type == 'projects']{
         return res
       },
 
-      /* ON SCROLL START */
+      ifTheMenuIsOpen() {
+        if(this.$store.state.isNavOpen == true) {
+          gsap.to(this.$refs.mainTitle, {
+            duration: 0.6,
+            x: '2vw',
+            ease: 'easeOut'
+          })
+        } else if(this.$store.state.isNavOpen == false) {
+          gsap.to(this.$refs.mainTitle, {
+            duration: 0.6,
+            x: 0,
+            ease: 'easeOut'
+          })
+        }
+      },
+      
+/*--------- ON SCROLL START ---------*/
+      
       onStartScrolling() {
-        // ANIMATE the image
         this.$refs.projIMG.animateCurrentImage({
-          borderRadius: '0%',
-          height: '100vh',
-          top: '0'
-        }, 0.8)     
-        this.$refs.buttonView.animateButton({
-          transform: 'scale(0.92)',
-          opacity: '0'
+          scale: '1.4',
+          ease: 'back.inOut(1.7)'
+        })
+        gsap.to(this.$refs.mainTitle, {
+          duration: 0.6,
+          lineHeight: '1.5',
+          ease: 'easeOut'
         })
         this.$refs.buttonView.animateText({
           opacity: '0'
         })
+        this.$refs.buttonView.animateButton({
+          scale: '0.9',
+          opacity: '0'
+        })
         gsap.to('.blueBackground', {
-          duration: 1,
+          duration: 0.9,
           width: '78vw',
           ease: 'easeOut'
         })
         gsap.to('.creamBackground', {
-          duration: 1.2,
+          duration: 0.9,
           width: '86vw',
           ease: 'easeOut'
         })
-        gsap.to(this.$refs.mainTitle, {
-          duration: 0.3,
-          opacity: '0',
-          ease: 'easeOut'
-        })
+        
       },
-
-      // WHILE SCROLLING
-      onChangeWholeScrolling() {
-        gsap.to(this.$refs.mainTitle, {
-          duration: 0.3, 
-          opacity: '0.3'
-        })
-      },
-
       // END scrolling
       onEndScrolling() {
         this.currentProjectIndex = this.$refs.projSwiper.$swiper.realIndex
+
         // ANIMATE the image
         this.$refs.projIMG.animateCurrentImage({
-          borderRadius: '50%',
-          height: '90vh',
-          top: '5vh'
-        }, 0.8)
-
-        // ANIMATE the button
-        this.$refs.buttonView.animateButton({
-          transform: 'scale(1)',
-          opacity: '1'
+          scale: '1',
+          ease: 'back.inOut(1.7)'
         })
 
+        // ANIMATE Title
+        gsap.to(this.$refs.mainTitle, {
+          duration: 0.8,
+          lineHeight: '1.1',
+          ease: 'easeIn'
+        })
         this.$refs.buttonView.animateText({
           opacity: '1'
         }, 1)
-
+        // ANIMATE the button
+        this.$refs.buttonView.animateButton({
+          scale: '1',
+          opacity: '1'
+        })
+        // ANIMATE BACKGROUNDS
         gsap.to('.blueBackground', {
           duration: 1.2,
           width: '64vw',
           ease: 'easeOut'
         })
-
         gsap.to('.creamBackground', {
           duration: 1.5,
           width: '74vw',
           ease: 'easeOut'
         })
-
-        gsap.to(this.$refs.mainTitle, {
-          duration: 0.3,
-          opacity: '1'
-        })
+        
       },
       // ----------------
       // PAGE TRANSITION
@@ -234,7 +250,6 @@ const query = `*[_type == 'projects']{
         })
         headTimeline.to(this.$refs.mainTitle, 0.3, {opacity: '0', onComplete: () => {
           this.$refs.projIMG.animateCurrentImage({
-            borderRadius: '0%',
             height: '100vh',
             top: '0',
             right: '-10vh',
@@ -265,9 +280,16 @@ const query = `*[_type == 'projects']{
 
 <style lang="scss" scoped>
 
+.scrollSymbol {
+  position: fixed;
+  left: 74px;
+  top: 40vh;
+}
+
 /*------- MASTER TITLE -------*/
 h1 {
   position: relative;
+  top: -30px;
   left: 20vw;
   width: 40vw; 
   position: relative;
@@ -278,6 +300,7 @@ h1 {
   }
   color: $--color--01;
   line-height: 1.1;
+  transition: all ease-in-out 1.2s;
 
   @media only screen 
     and (min-device-width: 375px) 
@@ -306,21 +329,28 @@ h1 {
 .slideFull {
   display: flex;
   flex-flow: column nowrap;
-  justify-content: center;
+  justify-content: flex-start;
   position: relative;
   width: 100%;
   height: 100vh;
+  padding-top: 24vh;
 }
 
 
 /*------ COMPONENTS ------*/
+
+.menuOpenPosition {
+  right: -24vw;
+}
 
 .imageHero {
   position: fixed;
   z-index: 90;
   right: -10vw;
 
-  transition: all ease-in-out 0.6s;
+  transition: all ease-in-out 1.2s;
+  transition-delay: 0.2s;
+  
 
   @media only screen 
     and (min-device-width: 375px) 
@@ -336,7 +366,7 @@ h1 {
   left: 40vw;
   z-index: 4000;
 
-  transition: all ease-in-out 0.6s;
+  transition: all ease-in-out 1.2s;
 
   @media only screen 
     and (min-device-width: 375px) 
@@ -353,7 +383,7 @@ h1 {
   left: 40vw;
   z-index: 4000;
 
-  transition: all ease-in-out 0.6s;
+  transition: all ease-in-out 1.2s;
 
   @media only screen 
     and (min-device-width: 375px) 
@@ -365,7 +395,7 @@ h1 {
 
 .buttonCore {
   position: fixed;
-  top: 30vh;
+  top: 27.5vh;
   z-index: 8500;
   right: 22vw;
   opacity: 1;
@@ -388,6 +418,8 @@ h1 {
   height: 100vh;
   z-index: 10;
   background: $--color--02;
+
+   transition: all ease-in-out 1.2s;
 }
 
 .creamBackground {
@@ -399,6 +431,8 @@ h1 {
   z-index: 5;
   background: $--color--04;
   opacity: 1;
+
+   transition: all ease-in-out 1.2s;
 }
 
 .blueFilter {
@@ -417,6 +451,28 @@ h1 {
 
 .appear {
   opacity: 1;
+}
+
+.appearOnMenu {
+  transform: translateX(120px);
+  transition: all ease 1.2s;
+  transition-delay: 0.7s;
+}
+
+.titleOnMenu {
+  transform: translateX(120px);
+  transition: all ease 1s;
+  transition-delay: 0.6s;
+}
+
+.backgroundChangeOne {
+  width: 36vw;
+  transition: all ease 2s;
+}
+
+.backgroundChangeTwo {
+  width: 40vw;
+  transition: all ease 3s;
 }
 
 </style>
