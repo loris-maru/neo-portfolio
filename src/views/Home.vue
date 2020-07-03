@@ -419,6 +419,8 @@ h1 {
   height: 100vh;
   z-index: 10;
   background: $--color--02;
+
+  transition: right ease-in-out 0.8s;
 }
 
 .creamBackground {
@@ -463,12 +465,12 @@ h1 {
 }
 
 .backgroundChangeOne {
-  width: 36vw;
+  right: -200px;
   transition: all ease 2s;
 }
 
 .backgroundChangeTwo {
-  width: 40vw;
+  right: -80px;
   transition: all ease 3s;
 }
 

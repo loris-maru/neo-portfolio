@@ -1,7 +1,7 @@
 <template>
   <div class="coreApp">
     <div class="navcore">
-      <Navigation @toTheInformation="transitionToInfo" />    
+      <Navigation />    
     </div>
 
     <SideBarMenu class="SideBarMenu" ref="sideBarContainer">
