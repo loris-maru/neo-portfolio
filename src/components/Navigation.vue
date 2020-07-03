@@ -29,7 +29,7 @@
             </div>
 
             <router-link to="/informations">
-                <span v-if="showBurger" :class="{'appear': !isBurgerActive}" class="menuIndex information">Infos</span>
+                  <span v-if="showBurger" :class="{'appear': !isBurgerActive}" class="menuIndex information">Infos</span>
             </router-link>
           </div>
     </div>
@@ -57,7 +57,7 @@ import gsap from 'gsap'
         return false
       },
       showButtonBack() {
-        const routeProject = ['Project']
+        const routeProject = ['Project', 'informations']
         if (routeProject.includes(this.$route.name)) return true
         return false
       }
@@ -157,6 +157,7 @@ import gsap from 'gsap'
   width: 150px;
   display: flex;
   flex-flow: row nowrap;
+  margin-left: 12px;
 
   a {
     color: $--color--02;

@@ -167,15 +167,17 @@ const query = `*[_type == 'projects']{
 /*--------- ON SCROLL START ---------*/
       
       onStartScrolling() {
+        gsap.to(this.$refs.mainTitle, {
+          duration: 0.6,
+          lineHeight: '1.6',
+          ease: 'easeOut'
+        })
+
         this.$refs.projIMG.animateCurrentImage({
           scale: '1.4',
           ease: 'back.inOut(1.7)'
         })
-        gsap.to(this.$refs.mainTitle, {
-          duration: 0.6,
-          lineHeight: '1.5',
-          ease: 'easeOut'
-        })
+        
         this.$refs.buttonView.animateText({
           opacity: '0'
         })
@@ -185,7 +187,7 @@ const query = `*[_type == 'projects']{
         })
         gsap.to('.blueBackground', {
           duration: 0.9,
-          width: '78vw',
+          width: '72vw',
           ease: 'easeOut'
         })
         gsap.to('.creamBackground', {
@@ -199,17 +201,16 @@ const query = `*[_type == 'projects']{
       onEndScrolling() {
         this.currentProjectIndex = this.$refs.projSwiper.$swiper.realIndex
 
-        // ANIMATE the image
-        this.$refs.projIMG.animateCurrentImage({
-          scale: '1',
-          ease: 'back.inOut(1.7)'
-        })
-
         // ANIMATE Title
         gsap.to(this.$refs.mainTitle, {
           duration: 0.8,
           lineHeight: '1.1',
           ease: 'easeIn'
+        })
+        // ANIMATE the image
+        this.$refs.projIMG.animateCurrentImage({
+          scale: '1',
+          ease: 'back.inOut(1.7)'
         })
         this.$refs.buttonView.animateText({
           opacity: '1'
@@ -300,7 +301,7 @@ h1 {
   }
   color: $--color--01;
   line-height: 1.1;
-  transition: all ease-in-out 1.2s;
+  transition: transform ease-in-out 1.2s;
 
   @media only screen 
     and (min-device-width: 375px) 
@@ -418,8 +419,6 @@ h1 {
   height: 100vh;
   z-index: 10;
   background: $--color--02;
-
-   transition: all ease-in-out 1.2s;
 }
 
 .creamBackground {
@@ -431,8 +430,6 @@ h1 {
   z-index: 5;
   background: $--color--04;
   opacity: 1;
-
-   transition: all ease-in-out 1.2s;
 }
 
 .blueFilter {
@@ -474,5 +471,6 @@ h1 {
   width: 40vw;
   transition: all ease 3s;
 }
+
 
 </style>

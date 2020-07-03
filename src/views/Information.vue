@@ -3,7 +3,7 @@
 
     <div class="contentCore">
 
-    <BackButton class="backButton" />
+    <BackButton v-if="showNavigation" class="backButton" />
       
     <HeaderInfos 
       :subtitle="information.headSubtitle"
@@ -107,6 +107,13 @@ export default {
     Footer,
     ImageL,
     BackButton
+  },
+  computed: {
+    showNavigation() {
+        const routesToHideOn = ['/informations']
+        if (routesToHideOn.includes(this.$route.fullPath)) return false
+        return true
+      },
   },
   methods: {
       async fetchInformations() {
