@@ -3,7 +3,10 @@
 
     <div  class="projectItems"
           v-for="(proj, projectNumber) in projects"
-          :key="projectNumber">
+          :style="getSpaceStyle(projectNumber)"
+          :key="projectNumber"
+          ref="projectItems"
+          >
       <MenuItem
         :projectNumber="projectNumber + 1"
         :projectCategory="proj.fieldName"
@@ -19,10 +22,10 @@
 <script>
 // Component
 import MenuItem from '@/components/MenuItem.vue'
-
+import gsap from 'gsap'
 // Sanity
 import sanity from '@/sanity'
-
+import {mapState} from 'vuex'
 const query = `*[_type == 'projects']{
   name,
   'fieldName': field->name,
@@ -33,22 +36,75 @@ const query = `*[_type == 'projects']{
   export default {
     data() {
       return {
-        projects: query
+        projects: []
       }
     },
     components: {
       MenuItem
     },
-    computed: {
-      isMenuActive() {
-        return this.$router.state.isNavOpen
+    watch: {
+      '$store.state.isNavOpen'(isOpen) {
+        isOpen ? this.onAppear() : this.onDisappear()
       }
     },
     methods: {
+      onDisappear() {
+        // Create a gsap timeline
+        const timeline = new gsap.timeline()
+        // Loop through refs of all nav items
+        this.$refs.projectItems.forEach(item => {
+          // Get data-right attribute which is used to determine
+          // How far the element should be moved
+          // data-right is set in the onAppear method
+          const rightValue = item.getAttribute('data-right')
+          // Add animation to the timeline
+          // 0 as the third argument indicates that all animations 
+          // should be started immediately
+          timeline.to(item, 1.4, {
+            right: `${rightValue}px`
+          }, 0)
+        })
+      },
+      onAppear() {
+       setTimeout(() => {
+         // Create a gsap timeline
+          const timeline = new gsap.timeline()
+          // Loop through refs of all nav items
+          this.$refs.projectItems.forEach(item => {
+            // Get right style of the item and extract the number value
+            const rightStyle = item.style.right
+            const rightValue = parseInt(rightStyle.replace('px', ''))
+            // Set data-right attribute so it can be used
+            // in the 'onDisappear' method. This is needed
+            // to move items back when sidebar is closed
+            item.setAttribute('data-right', rightValue)
+            // Add animation to the timeline
+            // 0 as the third argument indicates that all animations 
+            // should be started immediately
+            timeline.to(item, 1.4, {
+              right: 0
+            }, 0)
+          })
+        }, 1000) 
+      },
+      getSpaceStyle(index) {
+        let style = {
+          position: 'relative'
+        }
+        const MAP = {
+          0: '150px',
+          1: '100px',
+          2: '50px'
+        }
+
+        style.right = MAP[index % 3]
+        return style
+      },
       async fetchProjects() {
         console.log('Fetching in the menu')
         try {
           const response = await sanity.fetch(query)
+          console.log('respnse', response)
           this.projects = response
         } catch(error) {
           console.log('This is the error: ', error)
@@ -57,7 +113,7 @@ const query = `*[_type == 'projects']{
     },
     created() {
       this.fetchProjects()
-    }
+    },
     
   }
 </script>
@@ -88,7 +144,7 @@ const query = `*[_type == 'projects']{
   
   @media screen 
   and (min-device-width: 1920px) {
-    flex-basis: 25%;
+    //flex-basis: 25%;
   }
 
   @media only screen 

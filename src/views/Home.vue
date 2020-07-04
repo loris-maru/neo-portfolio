@@ -48,7 +48,7 @@
       @transitionEnd="onEndScrolling">     
 
         <swiper-slide class="slideFull" v-for="(proj, projNum) in projects" :key="projNum">
-          <h1 ref="mainTitle" :class="{'titleOnMenu': isThisMenuOpen}">
+          <h1 ref="mainTitle" class="project-main-title" :class="{'titleOnMenu': isThisMenuOpen}">
             {{proj.headline}}
           </h1>
         </swiper-slide>
@@ -106,7 +106,7 @@ const query = `*[_type == 'projects']{
           mousewheel: true,
           direction: 'vertical',
           slidesPerView: 1,
-          speed: 1000,
+          speed: 1600,
           sensitivity: 3,
           keyboard: true
         }
@@ -168,70 +168,69 @@ const query = `*[_type == 'projects']{
       
       onStartScrolling() {
         gsap.to(this.$refs.mainTitle, {
-          duration: 0.6,
-          lineHeight: '1.6',
-          ease: 'easeOut'
+          duration: 0.8,
+          lineHeight: '300px',
+          ease: 'easeOut',
+          onComplete: () => {
+            gsap.to(this.$refs.mainTitle, {
+              duration: 0.8,
+              lineHeight: '200px',
+              ease: 'easeIn'
+            })
+          }
         })
-
         this.$refs.projIMG.animateCurrentImage({
+          duration: 0.8,
           scale: '1.4',
-          ease: 'back.inOut(1.7)'
+          ease: 'easeOut',
+          onComplete: () => {
+            this.$refs.projIMG.animateCurrentImage({
+              duration: 0.8,
+              scale: '1',
+              ease: 'easeIn'
+            })
+          }
         })
-        
+        /* ANIMATE TEXT INSIDE THE BUTTON */
         this.$refs.buttonView.animateText({
-          opacity: '0'
+          opacity: '0',
+          onComplete: () => {
+            this.$refs.buttonView.animateText({
+              opacity: '1'
+            })
+          }
         })
-        this.$refs.buttonView.animateButton({
-          scale: '0.9',
-          opacity: '0'
-        })
+        /* ANIMATE BLUE BACKGROUND*/
         gsap.to('.blueBackground', {
           duration: 0.9,
           width: '72vw',
-          ease: 'easeOut'
+          ease: 'easeOut',
+          onComplete: () => {
+            gsap.to('.blueBackground', {
+              duration: 1.2,
+              width: '64vw',
+              ease: 'easeOut'
+            })
+          }
         })
+        /* ANIMATE CREAM BACKGROUND*/
         gsap.to('.creamBackground', {
           duration: 0.9,
           width: '86vw',
-          ease: 'easeOut'
+          ease: 'easeOut',
+          onComplete: () => {
+            gsap.to('.creamBackground', {
+              duration: 1.5,
+              width: '74vw',
+              ease: 'easeOut'
+            })
+          }
         })
         
       },
       // END scrolling
       onEndScrolling() {
         this.currentProjectIndex = this.$refs.projSwiper.$swiper.realIndex
-
-        // ANIMATE Title
-        gsap.to(this.$refs.mainTitle, {
-          duration: 0.8,
-          lineHeight: '1.1',
-          ease: 'easeIn'
-        })
-        // ANIMATE the image
-        this.$refs.projIMG.animateCurrentImage({
-          scale: '1',
-          ease: 'back.inOut(1.7)'
-        })
-        this.$refs.buttonView.animateText({
-          opacity: '1'
-        }, 1)
-        // ANIMATE the button
-        this.$refs.buttonView.animateButton({
-          scale: '1',
-          opacity: '1'
-        })
-        // ANIMATE BACKGROUNDS
-        gsap.to('.blueBackground', {
-          duration: 1.2,
-          width: '64vw',
-          ease: 'easeOut'
-        })
-        gsap.to('.creamBackground', {
-          duration: 1.5,
-          width: '74vw',
-          ease: 'easeOut'
-        })
-        
       },
       // ----------------
       // PAGE TRANSITION
@@ -281,6 +280,11 @@ const query = `*[_type == 'projects']{
 
 <style lang="scss" scoped>
 
+.project-main-title {
+  will-change: transform;
+  height: 500px;
+}
+
 .scrollSymbol {
   position: fixed;
   left: 74px;
@@ -290,17 +294,17 @@ const query = `*[_type == 'projects']{
 /*------- MASTER TITLE -------*/
 h1 {
   position: relative;
-  top: -30px;
+  top: -70px;
   left: 20vw;
-  width: 40vw; 
+  width: 50vw; 
   position: relative;
   font: {
     family: 'Oni';
-    size: 9vw;
+    size: 180px;
     variation-settings: 'wght' 700;
   }
   color: $--color--01;
-  line-height: 1.1;
+  line-height: 200px;
   transition: transform ease-in-out 1.2s;
 
   @media only screen 
@@ -310,6 +314,11 @@ h1 {
     font-size: 68px;
     left: 8vw;
     top: -2vw;
+  }
+
+  @media screen and (min-device-width: $--breakpoint--super-desktop){
+    top: 0;
+    left: 28vw;
   }
 }
 
@@ -407,6 +416,10 @@ h1 {
       right: 14vw;
       top: 58vh;
     }
+
+  @media screen and (min-device-width: $--breakpoint--super-desktop){
+    top: 25vh;
+    }
   }
 
 /*------ BACKGROUND ------*/
@@ -467,11 +480,13 @@ h1 {
 .backgroundChangeOne {
   right: -200px;
   transition: all ease 2s;
+  transition-delay: 0.5s;
 }
 
 .backgroundChangeTwo {
   right: -80px;
   transition: all ease 3s;
+  transition-delay: 0.5s;
 }
 
 

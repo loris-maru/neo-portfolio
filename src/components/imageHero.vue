@@ -49,7 +49,7 @@ import gsap from 'gsap'
         heroImageNew.onload = () => {
           setTimeout(() => {
             const speedCurrent = 0.8
-            const speedNext = 0.3
+            const speedNext = 0.6
             let timeline = gsap.timeline()         
             timeline.to(heroImageCurrent, speedCurrent, {opacity: 0})
             timeline.to(heroImageNew, speedNext, {opacity: 1, onComplete: () => {
@@ -86,10 +86,10 @@ import gsap from 'gsap'
         let timeline = gsap.timeline()
         timeline.to(image, speed, value)
       },
-      animateCurrentImage(value, speed = 1.3) {
+      animateCurrentImage(value) {
         const {heroImageCurrent} = this.$refs   
         let timeline = gsap.timeline()   
-        timeline.to(heroImageCurrent, speed, value)
+        timeline.to(heroImageCurrent, value)
       }
     }
   }

@@ -1,9 +1,8 @@
 <template>
   <div class="imgContainer">
-    <lazy-component>
+    <lazy-component @show="onImageLoad">
     <img  class="image"
-          :class="imageOpacityClass"
-          @load="onImageLoad"  
+          :class="imageOpacityClass"         
           :src="imageUrlFor(image).auto('format').quality(70).fit('max')"
           alt="Image of the project" />
     </lazy-component>

@@ -4,7 +4,7 @@
     </div>
 
     <transition name="slide">
-      <div v-if="isPanelOpen" class="sidebar-panel" :class="{'roundingElements': !isPanelOpen}">
+      <div v-show="isPanelOpen" class="sidebar-panel" :class="{'roundingElements': !isPanelOpen}">
         <slot></slot>
       </div>
     </transition>

@@ -6,7 +6,7 @@
     <div v-if="project" class="contentCore">
       <transition-group name="fade" tag="div" appear>
         <div class="component-container" v-for="(component, index) in project.components" :key="index">
-          <component :is="getComponentTag(component._type)" v-bind="component" :project="project"  />
+          <component :is="getComponentTag(component._type)"  v-bind="component" :project="project"  />
         </div>
       </transition-group>
     </div>
