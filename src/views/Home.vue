@@ -174,7 +174,7 @@ const query = `*[_type == 'projects']{
           onComplete: () => {
             gsap.to(this.$refs.mainTitle, {
               duration: 0.4,
-              lineHeight: '1.15em',
+              lineHeight: '1.05em',
               ease: 'easeOut'
             })
           }
