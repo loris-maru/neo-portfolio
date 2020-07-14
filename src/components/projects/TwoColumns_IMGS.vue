@@ -98,7 +98,7 @@ const imageBuilder = imageUrlBuilder(sanity)
 }
 
 .opacity-full {
-  opacity: 100%;
+  opacity: 1;
 }
 
 
