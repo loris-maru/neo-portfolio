@@ -169,13 +169,13 @@ const query = `*[_type == 'projects']{
       onStartScrolling() {
         gsap.to(this.$refs.mainTitle, {
           duration: 0.8,
-          lineHeight: '300px',
-          ease: 'easeOut',
+          lineHeight: '2em',
+          ease: 'easeIn',
           onComplete: () => {
             gsap.to(this.$refs.mainTitle, {
-              duration: 0.8,
-              lineHeight: '200px',
-              ease: 'easeIn'
+              duration: 0.4,
+              lineHeight: '1.15em',
+              ease: 'easeOut'
             })
           }
         })
