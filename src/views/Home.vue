@@ -311,7 +311,7 @@ h1 {
     variation-settings: 'wght' 700;
   }
   color: $--color--01;
-  line-height: 200px;
+  line-height: 1.05em;
   transition: transform ease-in-out 1.2s;
 
   @media only screen 
