@@ -289,6 +289,13 @@ const query = `*[_type == 'projects']{
   position: fixed;
   left: 74px;
   top: 40vh;
+
+  @media only screen 
+    and (min-device-width: 375px) 
+    and (max-device-width: 736px) 
+    and (orientation: portrait) { 
+    display: none;
+  }
 }
 
 /*------- MASTER TITLE -------*/
@@ -414,7 +421,7 @@ h1 {
       and (max-device-width: 736px) 
       and (orientation: portrait) { 
       right: 14vw;
-      top: 58vh;
+      top: 50vh;
     }
 
   @media screen and (min-device-width: $--breakpoint--super-desktop){
