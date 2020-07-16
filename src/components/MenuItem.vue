@@ -1,20 +1,21 @@
 <template>
   <div class="coreMenuItem">
-    <section>
-      <span class="projNumber">{{projectNumber}}</span>
-      <h2>{{projectCategory}}</h2>
-    </section>
-    <h1>
-      <router-link :to="`/project/${projectSlug}`" @click.native="$store.commit('toggleNav')">
-        {{projectName}}
-      </router-link>
-    </h1>
-
+    <a @click.prevent="$emit('fromMenuToProject', projectSlug)">
+      <section>
+        <span class="projNumber">{{projectNumber}}</span>
+        <h2>{{projectCategory}}</h2>
+      </section>
+      <h1>
+          {{projectName}}
+      </h1>
+      </a>
   </div>
 </template>
 
 <script>
+
   export default {
+    name: 'MenuItem',
     props: {
       projectNumber: {
         type: Number, 
@@ -58,6 +59,7 @@ section {
 a {
   color: $--color--02;
   text-decoration: none;
+  cursor: pointer;
 }
 
 h1 {

@@ -13,6 +13,7 @@
         :projectName="proj.name"
         :projectSlug="proj.projectSlug"
         class="itemProjectMenu"
+        @fromMenuToProject="goToTheProject"
         />
     </div>
 
@@ -34,6 +35,7 @@ const query = `*[_type == 'projects']{
   }`
 
   export default {
+    name: 'Menu',
     data() {
       return {
         projects: []
@@ -109,6 +111,10 @@ const query = `*[_type == 'projects']{
         } catch(error) {
           console.log('This is the error: ', error)
         }
+      },
+      goToTheProject(url) {
+        this.$store.commit('toggleNav')
+        this.$router.push(url)
       }
     },
     created() {
@@ -156,11 +162,11 @@ const query = `*[_type == 'projects']{
 }
 
 .itemProjectMenu {
-  margin-bottom: 100px;
+  margin-bottom: 60px;
 
   @media screen 
   and (min-device-width: 1920px) {
-    margin-bottom: 160px;
+    margin-bottom: 100px;
   }
 
   @media only screen 
