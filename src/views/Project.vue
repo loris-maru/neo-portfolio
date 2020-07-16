@@ -102,9 +102,6 @@ const COMPONENT_MAP = {
       // Go to homepage if there is no slug
       if (!this.slug) this.$router.replace('/')
       this.fetchProject(this.slug)
-    },
-    updated() {
-      this.fetchProject(this.slug)
     }
   }
 </script>
