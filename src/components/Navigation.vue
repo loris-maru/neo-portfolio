@@ -25,7 +25,7 @@
 
           <div v-if="!showButtonBack" class="optionalBlock">
             <div v-if="showBurger" class="divider mobileVisibility"
-            :class="{'appear': !isBurgerActive, 'index': isBurgerActive}">
+            :class="{'appear': !isBurgerActive, 'index': isBurgerActive, 'disappear': showButtonBack}">
             </div>
 
             <router-link to="/informations">

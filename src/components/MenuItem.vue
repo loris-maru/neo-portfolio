@@ -33,7 +33,10 @@
         type: [Number, String],
         required: true
       }
-    }
+    },
+    projectSlug() {
+        return `/project/${this.slug}`
+      }
   }
 </script>
 
