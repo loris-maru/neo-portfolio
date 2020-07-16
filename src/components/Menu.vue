@@ -11,7 +11,7 @@
         :projectNumber="projectNumber + 1"
         :projectCategory="proj.fieldName"
         :projectName="proj.name"
-        :projectSlug="proj.projectSlug"
+        :slug="proj.projectSlug"
         class="itemProjectMenu"
         @fromMenuToProject="goToTheProject"
         />

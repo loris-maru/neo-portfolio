@@ -29,14 +29,16 @@
         type: String, 
         default: 'My Project'
       },
-      projectSlug: {
+      slug: {
         type: [Number, String],
         required: true
       }
     },
-    projectSlug() {
+    computed: {
+      projectSlug() {
         return `/project/${this.slug}`
       }
+    }
   }
 </script>
 
