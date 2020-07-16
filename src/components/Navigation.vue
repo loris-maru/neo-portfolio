@@ -28,7 +28,7 @@
             :class="{'appear': !isBurgerActive, 'index': isBurgerActive, 'disappear': showButtonBack}">
             </div>
 
-            <router-link to="/informations">
+            <router-link to="/information">
                   <span v-if="showBurger" :class="{'appear': !isBurgerActive}" class="menuIndex information">Infos</span>
             </router-link>
           </div>
@@ -47,7 +47,7 @@ import gsap from 'gsap'
         return this.$store.state.isNavOpen
       },
       showBurger() {
-        const routesToHideOn = ['/informations']
+        const routesToHideOn = ['/information']
         if (routesToHideOn.includes(this.$route.fullPath)) return false
         return true
       },
@@ -57,7 +57,7 @@ import gsap from 'gsap'
         return false
       },
       showButtonBack() {
-        const routeProject = ['Project', 'informations']
+        const routeProject = ['Project', 'information']
         if (routeProject.includes(this.$route.name)) return true
         return false
       }

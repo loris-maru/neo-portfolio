@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import Home from '../views/Home.vue'
+import Information from '../views/Information.vue'
 
 const loadView = page => () => import(`@/views/${page}.vue`)
 
@@ -8,12 +10,12 @@ Vue.use(VueRouter)
   {
     path: '/',
     name: 'Home',
-    component: loadView('Home')
+    component: Home
   },
   {
-    path: '/informations',
-    name: 'informations',
-    component: loadView('Information')
+    path: '/information',
+    name: 'information',
+    component: Information
   },
   {
     path: '/project/:slug',
