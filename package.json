@@ -15,7 +15,7 @@
     "express": "^4.17.1",
     "gsap": "^3.3.2",
     "simplebar-vue": "^1.5.0",
-    "swiper": "^5.4.3",
+    "swiper": "^6.5.1",
     "vue": "^2.6.11",
     "vue-awesome-swiper": "^4.1.1",
     "vue-burger-menu": "^2.0.5",
